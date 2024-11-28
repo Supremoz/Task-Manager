@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\
 Task_Manager
 none
 false
-TRACE;RELEASE;NET;NET8_0;NETCOREAPP
-C:\Users\krukru\Desktop\Task-Manager\App.xaml
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\App.xaml
 3-1761685733
 
-10-1544240628
-3961432127218
+61405217767
+198-294894759
 Log-in.xaml;MainWindow.xaml;Sign-up.xaml;
 
-True
+False
 

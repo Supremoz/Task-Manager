@@ -23,3 +23,28 @@ C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\refint\Task Manage
 C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.pdb
 C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
 C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\bin\Debug\net8.0-windows\Task Manager.exe
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\bin\Debug\net8.0-windows\Task Manager.deps.json
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\bin\Debug\net8.0-windows\Task Manager.runtimeconfig.json
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\bin\Debug\net8.0-windows\Task Manager.dll
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\bin\Debug\net8.0-windows\Task Manager.pdb
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Log-in.g.cs
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Sign-up.g.cs
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\App.g.cs
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.cache
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.lref
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Log-in.baml
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\MainWindow.baml
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Sign-up.baml
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.g.resources
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfoInputs.cache
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfo.cs
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.csproj.CoreCompileInputs.cache
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.sourcelink.json
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.dll
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\refint\Task Manager.dll
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.pdb
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
+C:\BSCpE 3rd yr - 2nd sem\Task Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
