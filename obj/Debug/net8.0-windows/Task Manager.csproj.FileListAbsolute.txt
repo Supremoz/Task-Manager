@@ -1,0 +1,25 @@
+C:\Users\krukru\Desktop\Task-Manager\bin\Debug\net8.0-windows\Task Manager.exe
+C:\Users\krukru\Desktop\Task-Manager\bin\Debug\net8.0-windows\Task Manager.deps.json
+C:\Users\krukru\Desktop\Task-Manager\bin\Debug\net8.0-windows\Task Manager.runtimeconfig.json
+C:\Users\krukru\Desktop\Task-Manager\bin\Debug\net8.0-windows\Task Manager.dll
+C:\Users\krukru\Desktop\Task-Manager\bin\Debug\net8.0-windows\Task Manager.pdb
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Log-in.g.cs
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Sign-up.g.cs
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.cache
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.lref
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Log-in.baml
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Sign-up.baml
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.g.resources
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfoInputs.cache
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfo.cs
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.csproj.CoreCompileInputs.cache
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.sourcelink.json
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.dll
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\refint\Task Manager.dll
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.pdb
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
+C:\Users\krukru\Desktop\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll

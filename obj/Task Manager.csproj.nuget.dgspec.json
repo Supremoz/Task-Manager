@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\BSCpE 3rd yr - 2nd sem\\Task Manager\\Task Manager.csproj": {}
+    "C:\\Users\\krukru\\Desktop\\Task-Manager\\Task Manager.csproj": {}
   },
   "projects": {
-    "C:\\BSCpE 3rd yr - 2nd sem\\Task Manager\\Task Manager.csproj": {
+    "C:\\Users\\krukru\\Desktop\\Task-Manager\\Task Manager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\BSCpE 3rd yr - 2nd sem\\Task Manager\\Task Manager.csproj",
+        "projectUniqueName": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Task Manager.csproj",
         "projectName": "Task Manager",
-        "projectPath": "C:\\BSCpE 3rd yr - 2nd sem\\Task Manager\\Task Manager.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\BSCpE 3rd yr - 2nd sem\\Task Manager\\obj\\",
+        "projectPath": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Task Manager.csproj",
+        "packagesPath": "C:\\Users\\krukru\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\krukru\\Desktop\\Task-Manager\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\krukru\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -58,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

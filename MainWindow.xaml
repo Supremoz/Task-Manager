@@ -5,8 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Task Manager" Height="440" Width="390" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="CustomButtonStylee" TargetType="Button">
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3369F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+            BorderBrush="White" 
+            BorderThickness="1.5" 
+            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Background="#FF8395EE">
+        <TextBlock FontFamily="/Resources/#Pontano Sans SemiBold" FontSize="34" Margin="30,40,0,0">Create Your Account</TextBlock>
+        <TextBlock FontFamily="/Resources/#Pontano Sans" FontSize="12.5" Foreground="#FFE3E3EA" Margin="35,0,0,0">New here? Create your account today!</TextBlock>
 
-    </Grid>
+        <Grid Width="335" Height="40" HorizontalAlignment="Center" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#E5E5E5" CornerRadius="8,0,0,8" BorderThickness="0.5,0.5,1,0.5" BorderBrush="Black">
+                <Image Source="/Resources/user.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+            <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
+                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Username" />
+            </Border>
+        </Grid>
+
+        <Grid Width="335" Height="40" HorizontalAlignment="Center" Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#E5E5E5" CornerRadius="8,0,0,8" BorderThickness="0.5,0.5,1,0.5" BorderBrush="Black">
+                <Image Source="/Resources/password.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+            <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
+                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Password" />
+            </Border>
+        </Grid>
+
+        <Grid Width="335" Height="40" HorizontalAlignment="Center" Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#E5E5E5" CornerRadius="8,0,0,8" BorderThickness="0.5,0.5,1,0.5" BorderBrush="Black">
+                <Image Source="/Resources/email.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+            <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
+                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Email" />
+            </Border>
+        </Grid>
+        <Button FontFamily="/Resources/#Pontano Sans" Style="{StaticResource CustomButtonStylee}" Content="Sign Up" Margin="0,35,0,0" Width="330" Height="36.5" Padding="5,1,1,1"/>
+    </StackPanel>
 </Window>
