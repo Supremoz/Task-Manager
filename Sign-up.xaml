@@ -42,8 +42,8 @@
             <Border Grid.Column="0" Background="#E5E5E5" CornerRadius="8,0,0,8" BorderThickness="0.5,0.5,1,0.5" BorderBrush="Black">
                 <Image Source="/Resources/user.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Border>
-            <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
-                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Username" />
+            <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5" >
+                <TextBox x:Name="UsernameTextBox" Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Username" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
             </Border>
         </Grid>
 
@@ -57,7 +57,7 @@
                 <Image Source="/Resources/password.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Border>
             <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
-                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Password" />
+                <TextBox x:Name="PasswordTextBox" Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Password" LostFocus="PasswordTextBox_LostFocus"  GotFocus="TextBox_GotFocus" PreviewTextInput="PasswordTextBox_PreviewTextInput"  PreviewKeyDown="PasswordTextBox_PreviewKeyDown"/>
             </Border>
         </Grid>
 
@@ -71,7 +71,7 @@
                 <Image Source="/Resources/email.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Border>
             <Border Grid.Column="1" Background="#E5E5E5" CornerRadius="0,8,8,0" BorderBrush="Black" BorderThickness="1,0.5,0.5,0.5">
-                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Email" />
+                <TextBox Margin="10,0" VerticalAlignment="Center" Background=" Transparent" BorderThickness="0" FontSize="14" Foreground="Gray" Text="Email" GotFocus="TextBox_GotFocus" x:Name="EmailTextBox"  LostFocus="TextBox_LostFocus"/>
             </Border>
         </Grid>
         <Button FontFamily="/Resources/#Pontano Sans" Style="{StaticResource CustomButtonStylee}" Content="Sign Up" Margin="0,35,0,0" Width="330" Height="36.5" Padding="5,1,1,1"/>
