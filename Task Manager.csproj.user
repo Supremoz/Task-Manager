@@ -10,18 +10,12 @@
     <Compile Update="Log-in.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Sign-up.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Log-in.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Sign-up.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

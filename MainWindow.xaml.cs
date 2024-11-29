@@ -16,6 +16,7 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string _actualPassword = string.Empty;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +42,61 @@ namespace Task_Manager
         {
             LoginView.Visibility = Visibility.Collapsed;
             SignUpView.Visibility = Visibility.Visible;
+        }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+
+            if (textBox != null && (textBox.Text == "Username" || textBox.Text == "Password" || textBox.Text == "Email"))
+            {
+                textBox.Text = "";
+                textBox.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                // Restore placeholder if text is empty
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    if (textBox.Name == "Login_username")
+                    {
+                        textBox.Text = "Username";
+                    }
+                    else if (textBox.Name == "Login_pass")
+                    {
+                        textBox.Text = "Password";
+                    }
+
+                    textBox.Foreground = new SolidColorBrush(Colors.Gray); // Placeholder color
+                }
+            }
+        }
+        private void PasswordTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = true;
+
+            Login_pass.Text += "*"; // Display asterisk
+            Login_pass.CaretIndex = Login_pass.Text.Length; // Move caret to the end
+            _actualPassword += e.Text; // Store actual input
+        }
+
+        private void PasswordTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back && _actualPassword.Length > 0)
+            {
+                e.Handled = true;
+
+
+                Login_pass.Text = Login_pass.Text.Remove(Login_pass.Text.Length - 1);
+                _actualPassword = _actualPassword.Remove(_actualPassword.Length - 1);
+
+                Login_pass.CaretIndex = Login_pass.Text.Length;
+            }
         }
     }
 }

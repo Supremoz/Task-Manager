@@ -42,7 +42,7 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/user.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,0.5,.5">
-                        <TextBox FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Username" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <TextBox GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" x:Name="Login_username" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Username" Foreground="#7a7c99" Cursor="IBeam"/>
                     </Border>
                 </Grid>
 
@@ -58,7 +58,7 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/pass.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,.5,.5">
-                        <TextBox FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <TextBox PreviewKeyDown="PasswordTextBox_PreviewKeyDown" PreviewTextInput="PasswordTextBox_PreviewTextInput" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" x:Name="Login_pass" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
                     </Border>
                 </Grid>
 
