@@ -80,7 +80,7 @@
                 </Button>
             </StackPanel>
         </Border>
-        <Border x:Name="SignUpView" Visibility="Collapsed" Grid.Column="1" Background="#D9D9D9" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290" CornerRadius="8" Margin="0,15,0,0">
+        <Border x:Name="SignUpView" Visibility="Visible" Grid.Column="1" Background="#D9D9D9" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290" CornerRadius="8" Margin="0,15,0,0">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290">
                 <TextBlock FontFamily="/Fonts/#Pontano Sans Bold" Text="Create Account" FontSize="17" Foreground="#444" Margin="15,10,0,10" />
 
@@ -96,7 +96,7 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/user.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,0.5,.5">
-                        <TextBox FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Username" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <TextBox x:Name="Signup_username" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Username" Foreground="#7a7c99" Cursor="IBeam"/>
                     </Border>
                 </Grid>
 
@@ -112,7 +112,7 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/pass.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,.5,.5">
-                        <TextBox FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <TextBox PreviewKeyDown="PasswordTextBox_PreviewKeyDown" PreviewTextInput="PasswordTextBox_PreviewTextInput" x:Name="Signup_pass" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
                     </Border>
                 </Grid>
 
@@ -128,7 +128,7 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/email .png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,.5,.5">
-                        <TextBox FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Email" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <TextBox x:Name="Signup_email" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Email" Foreground="#7a7c99" Cursor="IBeam"/>
                     </Border>
                 </Grid>
                 <Button x:Name="btn_signup" Content="SIGN UP" Margin="15,0" FontFamily="/Fonts/#Pontano Sans Bold" Style="{StaticResource CustomButtonStylee}" Background="#80bfff" Foreground="#385477" FontSize="18" Height="30" BorderBrush="Black" BorderThickness=".5" Cursor="Hand" Click="btn_signup_Click">
