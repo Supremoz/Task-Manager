@@ -5,19 +5,17 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Security.Cryptography;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace Task_Manager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private string _actualLoginPassword = string.Empty;
-        private string _actualSignupPassword = string.Empty;
         public MainWindow()
         {
             InitializeComponent();
@@ -25,115 +23,215 @@ namespace Task_Manager
 
         private void btn_signup_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Account Created");
+            string username = Signup_username.Text;
+            string password = Signup_pass.Password;
+            string email = Signup_email.Text;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return;
+            }
+            if (!IsValidPassword(password))
+            {
+                MessageBox.Show("Password must be at least 6 characters long and contain at least one uppercase letter, one number, and one special character.");
+                return;
+            }
+
+            if (!email.EndsWith(".com"))
+            {
+                MessageBox.Show("Email is invalid!");
+                return;
+            }
+
+            string hashedPassword = HashPassword(password);
+
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "INSERT INTO users (username, password, email) VALUES (@username, @password, @Email)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", hashedPassword); // Save hashed password
+                        cmd.Parameters.AddWithValue("@Email", email);
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show($"Account created successfully for {username}.");
+                            ClearFields();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Account creation failed. Please try again.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
         }
 
-        private void btn_backtologin_Click(object sender, RoutedEventArgs e)
+        private bool IsValidPassword(string password)
         {
-            SignUpView.Visibility = Visibility.Collapsed;
-            LoginView.Visibility = Visibility.Visible;
+            
+            return Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$");
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2")); // Convert byte to hex string
+                }
+                return builder.ToString();
+            }
         }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Login Successfully");
+            string username = Login_username.Text;
+            string password = Login_pass.Password;
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT password FROM users WHERE username = @username";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+
+                        string storedHashedPassword = cmd.ExecuteScalar()?.ToString();
+
+                        if (storedHashedPassword != null && storedHashedPassword == HashPassword(password))
+                        {
+                            MessageBox.Show("Login successful.");
+
+                            // Open Log-in.xaml and close the current window
+                            Log_in loginWindow = new Log_in(); // Assumes Log-in.xaml is a Window named Log_in
+                            loginWindow.Show();
+                            this.Close(); // Close the current MainWindow
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid username or password.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
         }
 
         private void btn_createacc_Click(object sender, RoutedEventArgs e)
         {
-            LoginView.Visibility = Visibility.Collapsed;
+            ClearFields();
             SignUpView.Visibility = Visibility.Visible;
+            LoginView.Visibility = Visibility.Collapsed;
         }
+
+        private void btn_backtologin_Click(object sender, RoutedEventArgs e)
+        {
+            ClearFields();
+            SignUpView.Visibility = Visibility.Collapsed;
+            LoginView.Visibility = Visibility.Visible;
+        }
+
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-
-
             if (textBox != null && (textBox.Text == "Username" || textBox.Text == "Password" || textBox.Text == "Email"))
             {
                 textBox.Text = "";
                 textBox.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-
-            if (textBox != null)
+            if (textBox != null && string.IsNullOrWhiteSpace(textBox.Text))
             {
-                // Restore placeholder if text is empty
-                if (string.IsNullOrWhiteSpace(textBox.Text))
+                if (textBox.Name == "Signup_username")
                 {
-                    if (textBox.Name == "Login_username")
-                    {
-                        textBox.Text = "Username";
-                    }
-                    else if (textBox.Name == "Login_pass")
-                    {
-                        textBox.Text = "Password";
-                    }
-                    else if (textBox.Name == "Signup_pass")
-                    {
-                        textBox.Text = "Password";
-                    }
-                    else if (textBox.Name == "Signup_username")
-                    {
-                        textBox.Text = "Username";
-                    }
-                    else if (textBox.Name == "Signup_email")
-                    {
-                        textBox.Text = "Email";
-                    }
-
-                    textBox.Foreground = new SolidColorBrush(Colors.Gray); // Placeholder color
+                    textBox.Text = "Username";
                 }
+                else if (textBox.Name == "Signup_email")
+                {
+                    textBox.Text = "Email";
+                }
+                textBox.Foreground = new SolidColorBrush(Colors.Gray);
             }
         }
-        private void PasswordTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Login_pass_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
-
-            Login_pass.Text += "*"; // Display asterisk
-            Login_pass.CaretIndex = Login_pass.Text.Length; // Move caret to the end
-            _actualLoginPassword += e.Text; // Store actual input for login
+            // Hide placeholder when text is entered
+            LoginPlaceholderText.Visibility = string.IsNullOrEmpty(Login_pass.Password) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        // Event handler for Signup_pass
-        private void SignupPasswordTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Login_pass_GotFocus(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
-
-            Signup_pass.Text += "*"; // Display asterisk
-            Signup_pass.CaretIndex = Signup_pass.Text.Length; // Move caret to the end
-            _actualSignupPassword += e.Text; // Store actual input for signup
+            LoginPlaceholderText.Visibility = Visibility.Collapsed;
         }
 
-        // Event handler for handling Backspace in Login_pass
-        private void PasswordTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Login_pass_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Back && _actualLoginPassword.Length > 0)
+            if (string.IsNullOrEmpty(Login_pass.Password))
             {
-                e.Handled = true;
-
-                Login_pass.Text = Login_pass.Text.Remove(Login_pass.Text.Length - 1);
-                _actualLoginPassword = _actualLoginPassword.Remove(_actualLoginPassword.Length - 1);
-
-                Login_pass.CaretIndex = Login_pass.Text.Length;
+                LoginPlaceholderText.Visibility = Visibility.Visible;
             }
         }
 
-        // Event handler for handling Backspace in Signup_pass
-        private void SignupPasswordTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Signup_pass_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Back && _actualSignupPassword.Length > 0)
+            // Hide placeholder when the user types in the PasswordBox
+            PlaceholderText.Visibility = string.IsNullOrEmpty(Signup_pass.Password) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void Signup_pass_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PlaceholderText.Visibility = Visibility.Collapsed;
+        }
+
+        private void Signup_pass_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Signup_pass.Password))
             {
-                e.Handled = true;
-
-                Signup_pass.Text = Signup_pass.Text.Remove(Signup_pass.Text.Length - 1);
-                _actualSignupPassword = _actualSignupPassword.Remove(_actualSignupPassword.Length - 1);
-
-                Signup_pass.CaretIndex = Signup_pass.Text.Length;
+                PlaceholderText.Visibility = Visibility.Visible;
             }
         }
+        private void ClearFields()
+        {
+            Signup_username.Text = "Username";
+            Signup_email.Text = "Email";
+            Signup_pass.Password = string.Empty;
+            PlaceholderText.Visibility = Visibility.Visible;
+
+            Login_username.Text = "Username";
+            Login_pass.Password = string.Empty;
+            LoginPlaceholderText.Visibility = Visibility.Visible;
+
+            Signup_username.Foreground = new SolidColorBrush(Colors.Gray);
+            Signup_email.Foreground = new SolidColorBrush(Colors.Gray);
+        }
+
     }
 }

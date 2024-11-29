@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Task Manager"  Height="441" Width="700" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png">
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Left" Margin="167,128,0,0" TextWrapping="Wrap" Text="User Acct" VerticalAlignment="Top" Height="57" Width="183" FontSize="30"/>
+
     </Grid>
 </Window>

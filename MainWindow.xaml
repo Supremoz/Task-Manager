@@ -58,8 +58,29 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/pass.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,.5,.5">
-                        <TextBox PreviewKeyDown="PasswordTextBox_PreviewKeyDown" PreviewTextInput="PasswordTextBox_PreviewTextInput" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" x:Name="Login_pass" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <Grid>
+                            <!-- Placeholder Text -->
+                            <TextBlock x:Name="LoginPlaceholderText" Text="Password"
+                   VerticalAlignment="Center"
+                   Margin="0,0,3,0"
+                   Foreground="#7a7c99"
+                   IsHitTestVisible="False"
+                   FontFamily="Roboto Slab"
+                   FontSize="12"/>
+
+                            <!-- PasswordBox -->
+                            <PasswordBox x:Name="Login_pass" Margin="0,0,3,0"
+                     VerticalAlignment="Center"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Foreground="Black"
+                     Cursor="IBeam"
+                     PasswordChanged="Login_pass_PasswordChanged"
+                     GotFocus="Login_pass_GotFocus"
+                     LostFocus="Login_pass_LostFocus"/>
+                        </Grid>
                     </Border>
+
                 </Grid>
 
                 <TextBlock Text="Forgot Password?" Foreground="#28419e" HorizontalAlignment="Right" FontSize="12.5" Margin="0,-4,182,10" Cursor="Hand" TextDecorations="Underline" FontFamily="/Fonts/#Pontano Sans"/>
@@ -80,7 +101,7 @@
                 </Button>
             </StackPanel>
         </Border>
-        <Border x:Name="SignUpView" Visibility="Visible" Grid.Column="1" Background="#D9D9D9" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290" CornerRadius="8" Margin="0,15,0,0">
+        <Border x:Name="SignUpView" Visibility="Collapsed" Grid.Column="1" Background="#D9D9D9" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290" CornerRadius="8" Margin="0,15,0,0">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="290">
                 <TextBlock FontFamily="/Fonts/#Pontano Sans Bold" Text="Create Account" FontSize="17" Foreground="#444" Margin="15,10,0,10" />
 
@@ -112,8 +133,31 @@
                         <Image Width="15" Height="18" HorizontalAlignment="Left" Margin="5,0,5,0" Source="/Resources/pass.png" />
                     </Border>
                     <Border Grid.Column="1" Background="#FFF9F9F9" CornerRadius="0,5,5,0" BorderBrush="Black" Height="30" BorderThickness="0,.5,.5,.5">
-                        <TextBox PreviewKeyDown="PasswordTextBox_PreviewKeyDown" PreviewTextInput="PasswordTextBox_PreviewTextInput" x:Name="Signup_pass" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" FontFamily="/Fonts/#Roboto Slab" Margin="0,0,3,0" VerticalAlignment="Center" Background="Transparent" BorderThickness="0" Text="Password" Foreground="#7a7c99" Cursor="IBeam"/>
+                        <Grid>
+                            <!-- Placeholder Text -->
+                            <TextBlock x:Name="PlaceholderText" Text="Password" 
+                   VerticalAlignment="Center" 
+                   Margin="0,0,3,0" 
+                   Foreground="#7a7c99"
+                   IsHitTestVisible="False" 
+                   FontFamily="Roboto Slab" 
+                   FontSize="12"/>
+
+                            <!-- PasswordBox -->
+                            <PasswordBox x:Name="Signup_pass" Margin="0,0,3,0" 
+                     VerticalAlignment="Center" 
+                     Background="Transparent" 
+                     BorderThickness="0" 
+                     Foreground="Black" 
+                     Cursor="IBeam"
+                     FontFamily="/Fonts/#Roboto Slab" 
+                     PasswordChanged="Signup_pass_PasswordChanged"
+                     GotFocus="Signup_pass_GotFocus" 
+                     LostFocus="Signup_pass_LostFocus"/>
+                        </Grid>
                     </Border>
+
+
                 </Grid>
 
                 <Grid Margin="15,0,15,15" Height="30">
