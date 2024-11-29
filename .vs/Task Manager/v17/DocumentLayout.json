@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\krukru\\Desktop\\Task-Manager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\sign-up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:sign-up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\log-in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:log-in.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\log-in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:log-in.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\krukru\\desktop\\task-manager\\sign-up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:sign-up.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,8 +45,12 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\krukru\\Desktop\\Task-Manager\\App.xaml",
               "RelativeDocumentMoniker": "App.xaml",
@@ -50,7 +62,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Sign-up.xaml",
               "DocumentMoniker": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Sign-up.xaml",
               "RelativeDocumentMoniker": "Sign-up.xaml",
@@ -69,11 +81,25 @@
               "ToolTip": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Log-in.xaml",
               "RelativeToolTip": "Log-in.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-27T17:13:08.293Z"
+              "WhenOpened": "2024-11-27T17:13:08.293Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "Log-in.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Log-in.xaml.cs",
+              "RelativeDocumentMoniker": "Log-in.xaml.cs",
+              "ToolTip": "C:\\Users\\krukru\\Desktop\\Task-Manager\\Log-in.xaml.cs",
+              "RelativeToolTip": "Log-in.xaml.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T09:12:28.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\krukru\\Desktop\\Task-Manager\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
@@ -81,6 +107,19 @@
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-11-27T17:13:08.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\krukru\\Desktop\\Task-Manager\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\krukru\\Desktop\\Task-Manager\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAswCsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T08:31:20.543Z",
               "EditorCaption": ""
             }
           ]

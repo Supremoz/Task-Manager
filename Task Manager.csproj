@@ -11,14 +11,60 @@
 
   <ItemGroup>
     <None Remove="Fonts\PontanoSans-Bold.ttf" />
-    <None Remove="Resources\email.png" />
+    <None Remove="Fonts\PontanoSans-SemiBold.ttf" />
+    <None Remove="Fonts\RobotoSlab-Black.ttf" />
+    <None Remove="Fonts\RobotoSlab-Bold.ttf" />
+    <None Remove="Fonts\RobotoSlab-ExtraBold.ttf" />
+    <None Remove="Fonts\RobotoSlab-ExtraLight.ttf" />
+    <None Remove="Fonts\RobotoSlab-Light.ttf" />
+    <None Remove="Fonts\RobotoSlab-Medium.ttf" />
+    <None Remove="Fonts\RobotoSlab-Regular.ttf" />
+    <None Remove="Fonts\RobotoSlab-SemiBold.ttf" />
+    <None Remove="Fonts\RobotoSlab-Thin.ttf" />
+    <None Remove="Resources\bg_sign.png" />
     <None Remove="Resources\logo.png" />
-    <None Remove="Resources\password.png" />
+    <None Remove="Resources\pass.png" />
     <None Remove="Resources\user.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\password.png">
+    <Resource Include="Resources\email .png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\PontanoSans-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Black.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-ExtraBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-ExtraLight.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Light.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\RobotoSlab-Thin.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\bg_sign.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -27,10 +73,10 @@
     <Resource Include="Fonts\PontanoSans-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\email.png">
+    <Resource Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\logo.png">
+    <Resource Include="Resources\pass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\user.png">

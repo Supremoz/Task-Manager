@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="Log_in" Height="450" Width="800">
+        Title="Task Manager"  Height="441" Width="700" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png">
     <Grid>
         
     </Grid>
