@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Task_Manager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Title="Task Manager"  Height="441" Width="700" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png">
+                Title="Task Manager"  Height="441" Width="700" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="CustomButtonStylee" TargetType="Button">
             <Setter Property="Template">

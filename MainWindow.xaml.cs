@@ -124,7 +124,7 @@ namespace Task_Manager
                             MessageBox.Show("Login successful.");
 
                             // Open Log-in.xaml and close the current window
-                            Log_in loginWindow = new Log_in(); // Assumes Log-in.xaml is a Window named Log_in
+                            TaskDashboard loginWindow = new TaskDashboard(); // Assumes Log-in.xaml is a Window named Log_in
                             loginWindow.Show();
                             this.Close(); // Close the current MainWindow
                         }
@@ -170,13 +170,15 @@ namespace Task_Manager
             TextBox textBox = sender as TextBox;
             if (textBox != null && string.IsNullOrWhiteSpace(textBox.Text))
             {
-                if (textBox.Name == "Signup_username")
+                switch (textBox.Name)
                 {
-                    textBox.Text = "Username";
-                }
-                else if (textBox.Name == "Signup_email")
-                {
-                    textBox.Text = "Email";
+                    case "Signup_username":
+                    case "Login_username":
+                        textBox.Text = "Username";
+                        break;
+                    case "Signup_email":
+                        textBox.Text = "Email";
+                        break;
                 }
                 textBox.Foreground = new SolidColorBrush(Colors.Gray);
             }

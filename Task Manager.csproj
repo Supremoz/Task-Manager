@@ -21,10 +21,30 @@
     <None Remove="Fonts\RobotoSlab-Regular.ttf" />
     <None Remove="Fonts\RobotoSlab-SemiBold.ttf" />
     <None Remove="Fonts\RobotoSlab-Thin.ttf" />
+    <None Remove="Resources\arrowdown.png" />
     <None Remove="Resources\bg_sign.png" />
+    <None Remove="Resources\filter.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\pass.png" />
+    <None Remove="Resources\plus.png" />
+    <None Remove="Resources\refresh.png" />
+    <None Remove="Resources\side_admin.png" />
+    <None Remove="Resources\side_dashboard.png" />
+    <None Remove="Resources\side_logout.png" />
+    <None Remove="Resources\side_summary.png" />
+    <None Remove="Resources\side_user.png" />
     <None Remove="Resources\user.png" />
+    <None Remove="Resources\user_column1.png" />
+    <None Remove="Resources\user_column2.png" />
+    <None Remove="Resources\user_column3.png" />
+    <None Remove="Resources\user_column4.png" />
+    <None Remove="Resources\user_column5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\refresh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\arrowdown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\email .png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -78,13 +101,49 @@
     <Resource Include="Fonts\PontanoSans-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\filter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\pass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\side_admin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\side_dashboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\side_logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\side_summary.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\side_user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\user_column1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\user_column2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\user_column3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\user_column4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\user_column5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -7,15 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Log-in.xaml.cs">
+    <Compile Update="AddWeeklyTasks.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TaskDashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Log-in.xaml">
+    <Page Update="AddWeeklyTasks.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TaskDashboard.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
