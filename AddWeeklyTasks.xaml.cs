@@ -20,29 +20,19 @@ namespace Task_Manager
     /// </summary>
     public partial class AddWeeklyTasks : Window
     {
-        public static ObservableCollection<Task> Tasks { get; set; } = new ObservableCollection<Task>();
         public AddWeeklyTasks()
         {
             InitializeComponent();
-            DataGridTasks.ItemsSource = Tasks;
         }
 
-        private void btn_add_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Tasks.Add(new Task
-            {
-                TaskName = "Sample Task", // Replace with actual input values
-                TaskDescription = "Sample Description",
-                PriorityLevel = "Medium",
-                DueDate = "12/31/2024"
-            });
+
         }
 
-        private void CreateList_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var taskDashboard = new TaskDashboard(Tasks); // Pass tasks to TaskDashboard
-            taskDashboard.Show();
-            this.Close();
+
         }
     }
 }

@@ -21,9 +21,10 @@
     <None Remove="Fonts\RobotoSlab-Regular.ttf" />
     <None Remove="Fonts\RobotoSlab-SemiBold.ttf" />
     <None Remove="Fonts\RobotoSlab-Thin.ttf" />
-    <None Remove="Resources\arrowdown.png" />
+    <None Remove="Resources\arrdown.png" />
     <None Remove="Resources\bg_sign.png" />
     <None Remove="Resources\filter.png" />
+    <None Remove="Resources\Leading-icon.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\pass.png" />
     <None Remove="Resources\plus.png" />
@@ -39,9 +40,16 @@
     <None Remove="Resources\user_column3.png" />
     <None Remove="Resources\user_column4.png" />
     <None Remove="Resources\user_column5.png" />
+    <None Remove="Resources\X %281%29.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\arrdown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Leading-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\refresh.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -53,9 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\arrowdown.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Resources\email .png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -144,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\user_column5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\X (1).png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
