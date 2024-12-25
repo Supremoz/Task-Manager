@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using static Task_Manager.TaskDashboard;
 
 namespace Task_Manager
 {
@@ -123,8 +124,10 @@ namespace Task_Manager
                         {
                             MessageBox.Show("Login successful.");
 
-                            // Open Log-in.xaml and close the current window
-                            TaskDashboard loginWindow = new TaskDashboard(); // Assumes Log-in.xaml is a Window named Log_in
+                            UserData userData = new UserData();
+                            userData.Username = username;
+
+                            TaskDashboard loginWindow = new TaskDashboard(userData);
                             loginWindow.Show();
                             this.Close(); // Close the current MainWindow
                         }

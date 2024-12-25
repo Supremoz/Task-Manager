@@ -21,12 +21,22 @@ namespace Task_Manager
     /// </summary>
     public partial class TaskDashboard : Window
     {
-        public TaskDashboard()
+        public class UserData
         {
-            InitializeComponent();
-            DashboardImageScale.ScaleX = 1.15;
-            DashboardImageScale.ScaleY = 1.15;
+            public string Username { get; set; }
+           
         }
+
+     
+       public TaskDashboard(UserData userData)
+            {
+                InitializeComponent();
+                username_Dashboard.Text = userData.Username;
+                
+                DashboardImageScale.ScaleX = 1.15;
+                DashboardImageScale.ScaleY = 1.15;
+            }
+        
 
         private void DropdownButton_Click(object sender, RoutedEventArgs e)
         {
