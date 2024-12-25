@@ -4,3 +4,4 @@ This will help prevent potential conflicts during the merging process.
 Before pushing your commits, ensure that the code is functional and no errors have been encountered.
 
 SIGN UP WINDOW TO BE FOLLOW. ASDASDSAD
+Updated

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Task Manager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f4cfa1846d6bfd6176d8117b7ff293172f4eaf4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9e3fc955dc6e3f023fc3009cccbf2c9cf54ce66")]
 [assembly: System.Reflection.AssemblyProductAttribute("Task Manager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Task Manager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
