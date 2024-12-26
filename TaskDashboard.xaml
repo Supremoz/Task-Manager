@@ -29,6 +29,29 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="EditViewButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans Bold"/>
+            <Setter Property="Background" Value="#BFD1E3"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="#BFD1E3"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+    BorderBrush="{TemplateBinding BorderBrush}" 
+    BorderThickness="{TemplateBinding BorderThickness}" 
+    CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="MouseOverButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#DAEAFA"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -550,6 +573,76 @@
                                 <TextBox x:Name="DescriptionTxt" Width="1015" Height="250" Padding="15,5,15,5" FontSize="20" TextWrapping="Wrap" Background="Transparent" BorderThickness="0"/>
                             </Border>
                             <Button Click="AddTaskButton_Click" x:Name="AddTaskButton" Grid.Row="1" Style="{StaticResource CreateButtonStyle}" Content="ADD TASK" Width="100" Height="40" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="EditTaskView" Grid.Row="1" Background="#ECF7FF" Visibility="Collapsed">
+                <Border Background="#F3FAFF" Width="1035" CornerRadius="12" Margin="25" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="155"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="White" Margin="15,5,15,5" CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,8,0,10">
+                                    <TextBlock Text="Task Name" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="20"  Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="#717070"/>
+                                    <TextBox x:Name="TaskName" Text="Assignment" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="22"  Width="328" HorizontalAlignment="Left" Height="30" BorderBrush="Transparent"/>
+                                    <TextBlock Text="Category" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="20"  Width="90" VerticalAlignment="Stretch" HorizontalAlignment="Left" Foreground="#717070" Margin="0,5,0,0"/>
+                                    <ComboBox x:Name="EditCategoryComboBox" FontFamily="/Fonts/#Pontano Sans Medium" Width="220" Background="White" BorderBrush="White" BorderThickness="0" Padding="4" VerticalAlignment="Stretch" HorizontalAlignment="Left" FontSize="22">
+                                        <ComboBoxItem Content="Select Category" IsSelected="True"/>
+                                        <ComboBoxItem Content="Work"/>
+                                        <ComboBoxItem Content="Personal"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,8,10,10">
+                                    <TextBlock Text="Due Date" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="20"  Width="85" HorizontalAlignment="Right" VerticalAlignment="Stretch" Foreground="#717070"/>
+                                    <DatePicker x:Name="EditCustomDatePicker" FontFamily="/Fonts/#Pontano Sans Medium" Width="190"  Background="White"  BorderBrush="White" 
+                    BorderThickness="0" Padding="3"  HorizontalAlignment="Right"  FontSize="22"  HorizontalContentAlignment="Center">
+                                        <DatePicker.Resources>
+                                            <Style TargetType="DatePickerTextBox">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="DatePickerTextBox">
+                                                            <TextBox x:Name="PART_TextBox"
+                                             Text="CHOOSE DATE" 
+                                             Background="White" 
+                                             Foreground="Black"
+                                             IsReadOnly="True" 
+                                             BorderBrush="Transparent" 
+                                             HorizontalContentAlignment="Center" 
+                                             VerticalContentAlignment="Center"/>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </DatePicker.Resources>
+                                    </DatePicker>
+                                    <TextBlock Text="Category" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="20"  Width="90" HorizontalAlignment="Right" Foreground="#717070" Margin="0,3,0,0"/>
+                                    <ComboBox x:Name="EditPriorityComboBox" FontFamily="/Fonts/#Pontano Sans Medium" Width="210" Background="White" BorderBrush="White" BorderThickness="0" Padding="4" HorizontalAlignment="Right" FontSize="22" SelectedIndex="0">
+                                        <ComboBoxItem Content="TYPE OF PRIORITY" IsSelected="True" Foreground="Black"/>
+                                        <ComboBoxItem Content="High" Foreground="Red"/>
+                                        <ComboBoxItem Content="Moderate" Foreground="Orange"/>
+                                        <ComboBoxItem Content="Low" Foreground="Green"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0">
+                            <TextBlock Text="Description" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="20"  Width="110" HorizontalAlignment="Left" Foreground="#717070" Margin="20,0,0,0"/>
+                            <Border Width="985" Height="300" CornerRadius="10" Background="White" Padding="0" Margin="0,2,0,6.5" BorderBrush="White" BorderThickness="1">
+                                <TextBox x:Name="EditDescriptionTxt" Width="985" Height="300" Padding="15,5,15,5" FontSize="20" TextWrapping="Wrap" Background="Transparent" BorderThickness="0"/>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,40,0">
+                                <Button x:Name="DeleteButton" Style="{StaticResource EditViewButtonStyle}" Content="DELETE" Width="95" Height="40" Margin="0,0,20,0" Cursor="Hand" />
+                                <Button x:Name="SaveButton" Style="{StaticResource EditViewButtonStyle}" Content="SAVE" Width="95" Height="40" Cursor="Hand" />
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </Border>
