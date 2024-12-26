@@ -27,6 +27,7 @@ namespace Task_Manager
             string username = Signup_username.Text;
             string password = Signup_pass.Password;
             string email = Signup_email.Text;
+
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
             {
                 MessageBox.Show("All fields must be filled out.");
@@ -45,8 +46,7 @@ namespace Task_Manager
             }
 
             string hashedPassword = HashPassword(password);
-
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -54,17 +54,34 @@ namespace Task_Manager
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO users (username, password, email) VALUES (@username, @password, @Email)";
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    // Insert user data into the users table
+                    string userQuery = "INSERT INTO users (username, password, email) VALUES (@username, @password, @Email)";
+                    using (MySqlCommand cmd = new MySqlCommand(userQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@password", hashedPassword); // Save hashed password
+                        cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@Email", email);
 
                         int result = cmd.ExecuteNonQuery();
 
                         if (result > 0)
                         {
+                            // Create a unique task table for the user
+                            string taskTableQuery = $@"
+                        CREATE TABLE IF NOT EXISTS `{username}_tasks` (
+                            id INT PRIMARY KEY AUTO_INCREMENT,
+                            task_name VARCHAR(100),
+                            due_date DATE,
+                            category ENUM('Work', 'Personal'),
+                            description TEXT,
+                            priority ENUM('Low', 'Medium', 'High')
+                        )";
+
+                            using (MySqlCommand taskCmd = new MySqlCommand(taskTableQuery, connection))
+                            {
+                                taskCmd.ExecuteNonQuery();
+                            }
+
                             MessageBox.Show($"Account created successfully for {username}.");
                             ClearFields();
                         }
@@ -80,6 +97,7 @@ namespace Task_Manager
                 }
             }
         }
+
 
         private bool IsValidPassword(string password)
         {
@@ -105,7 +123,7 @@ namespace Task_Manager
         {
             string username = Login_username.Text;
             string password = Login_pass.Password;
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

@@ -413,18 +413,32 @@
                                 <DataGridTextColumn Header="Task Name" Binding="{Binding TaskName}" Width="250"/>
 
                                 <!-- Description -->
-                                <DataGridTextColumn Header="Description" Binding="{Binding Category}" Width="270"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="270"/>
+
 
                                 <!-- Priority -->
                                 <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="*">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
-                                            <Setter Property="Foreground" Value="Red" />
                                             <Setter Property="FontWeight" Value="Bold" />
                                             <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <!-- Default Color -->
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Priority}" Value="High">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Priority}" Value="Medium">
+                                                    <Setter Property="Foreground" Value="Orange" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Priority}" Value="Low">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
+
 
                                 <!-- Deadline -->
                                 <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="*" />
@@ -524,7 +538,7 @@
                                     <ComboBox x:Name="PriorityComboBox" FontFamily="/Fonts/#Pontano Sans Medium" Height="38" Width="220" Background="White" BorderBrush="White" BorderThickness="0" Padding="4" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" SelectedIndex="0" SelectionChanged="PriorityComboBox_SelectionChanged">
                                         <ComboBoxItem Content="TYPE OF PRIORITY" IsSelected="True" Foreground="Black"/>
                                         <ComboBoxItem Content="High" Foreground="Red"/>
-                                        <ComboBoxItem Content="Moderate" Foreground="Orange"/>
+                                        <ComboBoxItem Content="Medium" Foreground="Orange"/>
                                         <ComboBoxItem Content="Low" Foreground="Green"/>
                                     </ComboBox>
                                 </StackPanel>
@@ -535,7 +549,7 @@
                             <Border Width="1015" Height="250" CornerRadius="10" Background="White" Padding="0" Margin="0,0,0,18" BorderBrush="#D1E8FF" BorderThickness="1">
                                 <TextBox x:Name="DescriptionTxt" Width="1015" Height="250" Padding="15,5,15,5" FontSize="20" TextWrapping="Wrap" Background="Transparent" BorderThickness="0"/>
                             </Border>
-                            <Button x:Name="AddTaskButton" Grid.Row="1" Style="{StaticResource CreateButtonStyle}" Content="ADD TASK" Width="100" Height="40" Cursor="Hand"/>
+                            <Button Click="AddTaskButton_Click" x:Name="AddTaskButton" Grid.Row="1" Style="{StaticResource CreateButtonStyle}" Content="ADD TASK" Width="100" Height="40" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
                 </Border>
