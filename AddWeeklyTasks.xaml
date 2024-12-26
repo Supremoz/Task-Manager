@@ -64,7 +64,7 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="DatePickerTextBox">
                                                     <TextBox x:Name="PART_TextBox"
-                                                                 Text="CHOOSE DATE" 
+                                                                 Text="{Binding ElementName=CustomDatePicker, Path=SelectedDate, StringFormat=MM-dd-yy, TargetNullValue=CHOOSE DATE}" 
                                                                  Background="White" 
                                                                  Foreground="Black"
                                                                  IsReadOnly="True" 

@@ -1801,11 +1801,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\parai\\OneDrive\\Desktop\\Task-Manager\\Task Manager.csproj",
+      "projectUniqueName": "C:\\Users\\parai\\Desktop\\Task-Manager\\Task Manager.csproj",
       "projectName": "Task Manager",
-      "projectPath": "C:\\Users\\parai\\OneDrive\\Desktop\\Task-Manager\\Task Manager.csproj",
+      "projectPath": "C:\\Users\\parai\\Desktop\\Task-Manager\\Task Manager.csproj",
       "packagesPath": "C:\\Users\\parai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\parai\\OneDrive\\Desktop\\Task-Manager\\obj\\",
+      "outputPath": "C:\\Users\\parai\\Desktop\\Task-Manager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\parai\\AppData\\Roaming\\NuGet\\NuGet.Config",

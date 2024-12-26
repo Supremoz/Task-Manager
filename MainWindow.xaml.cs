@@ -46,7 +46,7 @@ namespace Task_Manager
 
             string hashedPassword = HashPassword(password);
 
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -105,7 +105,7 @@ namespace Task_Manager
         {
             string username = Login_username.Text;
             string password = Login_pass.Password;
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
