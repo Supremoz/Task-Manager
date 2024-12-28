@@ -321,7 +321,7 @@
             <Border Margin="8,8,0,0" Background="#DEECF8" CornerRadius="10" Width="420" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel Background="Transparent" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Source="/Resources/Leading-icon.png" Width="45"/>
-                    <TextBox FontFamily="/Fonts/#Pontano Sans" FontSize="20" VerticalAlignment="Center" Background="#DEECF8" Width="328" Height="42" BorderBrush="Transparent" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="SearchTextBox" FontFamily="/Fonts/#Pontano Sans" FontSize="20" VerticalAlignment="Center" Background="#DEECF8" Width="328" Height="42" BorderBrush="Transparent" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
                     <Button Background="#DEECF8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Height="45" Padding="0" BorderBrush="Transparent">
                         <Image Source="/Resources/filter.png" Width="30"/>
                     </Button>
@@ -330,74 +330,79 @@
 
             <!-- DASHBOARD SCREEN-->
             <Grid x:Name="TaskListView" Grid.Row="1" Background="#ECF7FF" Visibility="Visible" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="69*"/>
+                    <ColumnDefinition Width="296*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--FILTER BUTTON-->
-                <Border x:Name="FilterButtonRow" Grid.Row="0" Width="160" Height="40" CornerRadius="10" Background="White" HorizontalAlignment="Right" Padding="18,0,18,0" Margin="0,5,50,0">
+                <Border x:Name="FilterButtonRow" Grid.Row="0" Width="160" Height="40" CornerRadius="10"
+ Background="White" HorizontalAlignment="Right" Padding="18,0,18,0" Margin="0,18,50,12" Grid.Column="1">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="FILTER" FontFamily="/Fonts/#Pontano Sans" FontSize="23" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <Button x:Name="DropdownButton" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Stretch" Cursor="Hand" Focusable="False" Click="DropdownButton_Click">
+                        <TextBlock Text="FILTER" FontFamily="/Fonts/#Pontano Sans" FontSize="23"
+            VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Button x:Name="DropdownButton" Style="{StaticResource CustomButtonStyle}"
+         HorizontalAlignment="Stretch" Cursor="Hand" Focusable="False"
+         Click="DropdownButton_Click">
                             <Image Source="/Resources/arrdown.png" Width="35" IsHitTestVisible="False" Margin="0,1,0,0">
                                 <Image.RenderTransform>
                                     <ScaleTransform x:Name="HoverImageScale" ScaleX="1" ScaleY="1" />
                                 </Image.RenderTransform>
                                 <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
                             </Image>
-                            <Button.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="HoverImageScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.3"/>
-                                            <DoubleAnimation Storyboard.TargetName="HoverImageScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="HoverImageScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.3"/>
-                                            <DoubleAnimation Storyboard.TargetName="HoverImageScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.3"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Button.Triggers>
                         </Button>
                         <Popup Name="DropdownPopup" PlacementTarget="{Binding ElementName=DropdownButton}" StaysOpen="False">
                             <Border BorderBrush="White" BorderThickness="1" Background="White" Padding="10">
-                                <ListBox>
-                                    <ListBoxItem Content="CATEGORY" FontSize="18" BorderBrush="White" BorderThickness="1">
-                                        <ListBoxItem.Style>
-                                            <Style TargetType="ListBoxItem">
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="Foreground" Value="Black" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#E0E0E0" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ListBoxItem.Style>
-                                    </ListBoxItem>
-                                    <ListBoxItem Content="PRIORITY" FontSize="18" BorderBrush="White" BorderThickness="1"/>
-                                    <ListBoxItem Content="DEADLINE" FontSize="18" BorderBrush="White" BorderThickness="1"/>
+                                <ListBox x:Name="FilterDropdown" SelectionChanged="FilterDropdown_SelectionChanged">
+                                    <ListBoxItem Content="PRIORITY" FontSize="18" />
+                                    <ListBoxItem Content="DEADLINE" FontSize="18" />
                                 </ListBox>
                             </Border>
                         </Popup>
                     </StackPanel>
                 </Border>
-                <!--TASK LIST TABLE-->
-                <Border x:Name="ListCreateButtonRow" Grid.Row="1" Background="#F3FAFF" Margin="20,5,20,15" CornerRadius="5" Padding="10">
+                <!-- Filtering ComboBox -->
+                <Border x:Name="CategoryFilterRow" Grid.Row="0" Width="200" Height="40" CornerRadius="10"
+        Background="White" HorizontalAlignment="Right" Padding="10" Margin="0,18,50,12">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="CATEGORY" FontFamily="/Fonts/#Pontano Sans" FontSize="23"
+                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                        <Button x:Name="CategoryDropdownButton" Style="{StaticResource CustomButtonStyle}"
+                HorizontalAlignment="Stretch" Cursor="Hand" Focusable="False"
+                Click="CategoryDropdownButton_Click">
+                            <Image Source="/Resources/arrdown.png" Width="35" IsHitTestVisible="False" Margin="0,1,0,0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform x:Name="HoverImage" ScaleX="1" ScaleY="1" />
+                                </Image.RenderTransform>
+                                <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                            </Image>
+                        </Button>
+
+                        <Popup Name="CategoryDropdownPopup" PlacementTarget="{Binding ElementName=CategoryDropdownButton}" StaysOpen="False">
+                            <Border BorderBrush="White" BorderThickness="1" Background="White" Padding="10">
+                                <ListBox x:Name="CategoryFilterListBox" SelectionChanged="CategoryFilterListBox_SelectionChanged">
+                                    <ListBoxItem Content="All Tasks" FontSize="18" />
+                                    <ListBoxItem Content="Work" FontSize="18" />
+                                    <ListBoxItem Content="Personal" FontSize="18" />
+                                </ListBox>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </Border>
+                <!-- Task List Table -->
+                <Border x:Name="ListCreateButtonRow" Grid.Row="1" Background="#F3FAFF" Margin="20,5,20,15" CornerRadius="5" Padding="10" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <DataGrid FontSize="14" x:Name="TaskListTable" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
-                      Background="White" BorderBrush="Transparent" BorderThickness="0" 
-                      RowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="#EAE7E7" 
-                      VerticalGridLinesBrush="#EAE7E7" Margin="10">
+          Background="White" BorderBrush="Transparent" BorderThickness="0" 
+          RowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="#EAE7E7" 
+          VerticalGridLinesBrush="#EAE7E7" Margin="10">
                             <DataGrid.Resources>
                                 <!-- Header Style -->
                                 <Style TargetType="DataGridColumnHeader">
@@ -427,7 +432,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Width="20" Height="20" Content="✎" FontSize="12" Background="Transparent" 
-                BorderBrush="Transparent" Foreground="Black" Cursor="Hand" Click="Edit_task_Click"/>
+    BorderBrush="Transparent" Foreground="Black" Cursor="Hand" Click="Edit_task_Click"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -462,7 +467,7 @@
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
 
-
+                                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*" />
                                 <!-- Deadline -->
                                 <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="*" />
 
@@ -474,11 +479,11 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <CheckBox x:Name="task_status"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding StatusBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      Checked="TaskStatus_Checked"
-                      Unchecked="TaskStatus_Unchecked"/>
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          IsChecked="{Binding StatusBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Checked="TaskStatus_Checked"
+          Unchecked="TaskStatus_Unchecked"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -487,7 +492,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button x:Name="CreateTaskButton" Grid.Row="1" Style="{StaticResource CreateButtonStyle}" Content="CREATE TASK"
-                    Width="140" Height="40" Cursor="Hand" Click="CreateTaskButton_Click"/>
+        Width="140" Height="40" Cursor="Hand" Click="CreateTaskButton_Click"/>
                     </Grid>
                 </Border>
             </Grid>

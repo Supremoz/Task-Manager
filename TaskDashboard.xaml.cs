@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using MySql.Data.MySqlClient;
+using static Task_Manager.TaskDashboard;
 
 namespace Task_Manager
 {
     public partial class TaskDashboard : Window
     {
+        
         public class UserData
         {
             public string Username { get; set; }
@@ -19,7 +23,7 @@ namespace Task_Manager
         private bool _isLoading = false;
         // Store the username in a private field
         private string _username;
-
+        private List<TaskItem> _allTasks = new List<TaskItem>();
         // ObservableCollection to hold tasks dynamically
         public ObservableCollection<TaskItem> TaskList { get; set; } = new ObservableCollection<TaskItem>();
 
@@ -44,6 +48,7 @@ namespace Task_Manager
             public string Description { get; set; }
             public string Priority { get; set; }
             public string Deadline { get; set; }
+            public string Category { get; set; }
 
             private string _status = "In Progress";
             public string Status
@@ -75,6 +80,13 @@ namespace Task_Manager
         }
 
 
+        private void CategoryDropdownButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle the visibility of the popup
+            CategoryDropdownPopup.IsOpen = !CategoryDropdownPopup.IsOpen;
+        }
+
+
 
         // Load tasks from the database
         private void LoadTasks()
@@ -82,31 +94,36 @@ namespace Task_Manager
             _isLoading = true; // Start loading mode to prevent checkbox events
 
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string query = $"SELECT task_name, description, priority, due_date, status FROM `{userTaskTable}`";
+                    string query = $"SELECT task_name, description, priority, category, due_date, status FROM `{userTaskTable}`";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             TaskList.Clear(); // Clear current task list
+                            _allTasks.Clear();
 
                             while (reader.Read())
                             {
-                                TaskList.Add(new TaskItem
+                                var task = new TaskItem
                                 {
                                     TaskName = reader["task_name"].ToString(),
                                     Description = reader["description"].ToString(),
                                     Priority = reader["priority"].ToString(),
+                                    Category = reader["category"].ToString(),
                                     Deadline = Convert.ToDateTime(reader["due_date"]).ToString("yyyy-MM-dd"),
                                     Status = Convert.ToInt32(reader["status"]) == 0 ? "In Progress" : "Completed"
-                                });
+                                };
+
+                                TaskList.Add(task);
+                                _allTasks.Add(task);
                             }
                         }
                     }
@@ -185,7 +202,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(string taskName, int status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -240,7 +257,7 @@ namespace Task_Manager
             // Use the username to target the correct task table
             string userTaskTable = $"{_username}_tasks";
 
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -263,8 +280,6 @@ namespace Task_Manager
                         if (result > 0)
                         {
                             MessageBox.Show("Task added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                            // Add the new task to the DataGrid dynamically
                             TaskList.Add(new TaskItem
                             {
                                 TaskName = taskName,
@@ -289,6 +304,130 @@ namespace Task_Manager
                 catch (Exception ex)
                 {
                     MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void CategoryFilterListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CategoryFilterListBox.SelectedItem is ListBoxItem selectedItem)
+            {
+                string selectedCategory = selectedItem.Content.ToString();
+
+                // Call the method to filter tasks based on the selected category
+                FilterTasks(selectedCategory);
+
+                // Close the popup after selection
+                CategoryDropdownPopup.IsOpen = false;
+            }
+        }
+        private void FilterTasks(string category)
+        {
+            TaskList.Clear(); // Clear the current task list
+
+            // Filter tasks based on the selected category
+            var filteredTasks = _allTasks.AsQueryable();
+
+            switch (category)
+            {
+                case "All Tasks":
+                    filteredTasks = _allTasks.AsQueryable(); // Show all tasks
+                    break;
+                case "Work":
+                    filteredTasks = filteredTasks.Where(t => t.Category.Equals("Work", StringComparison.OrdinalIgnoreCase));
+                    break;
+                case "Personal":
+                    filteredTasks = filteredTasks.Where(t => t.Category.Equals("Personal", StringComparison.OrdinalIgnoreCase));
+                    break;
+                default:
+                    break;
+            }
+
+            // Add filtered tasks to the TaskList
+            foreach (var task in filteredTasks)
+            {
+                TaskList.Add(task);
+            }
+        }
+        private void FilterTasks(string filterType, string filterValue)
+        {
+            TaskList.Clear();
+
+            var filteredTasks = _allTasks.AsQueryable();
+
+            switch (filterType)
+            {
+                case "PRIORITY":
+                    filteredTasks = filteredTasks.Where(t => t.Priority.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
+                    break;
+                case "DEADLINE":
+                    filteredTasks = filteredTasks.Where(t => t.Deadline == filterValue);
+                    break;
+            }
+
+            foreach (var task in filteredTasks)
+            {
+                TaskList.Add(task);
+            }
+        }
+
+            private void SortTasks(string filterType, string sortOrder)
+            {
+                var taskList = _allTasks;
+                IEnumerable<TaskItem> sortedTasks = taskList;
+
+                switch (filterType)
+                {
+                    case "Priority":
+                        var priorityOrder = new Dictionary<string, int>
+                {
+                    { "Low", 1 },
+                    { "Medium", 2 },
+                    { "High", 3 }
+                };
+
+                        sortedTasks = sortOrder == "Ascending" 
+                            ? taskList.OrderBy(task => priorityOrder[task.Priority])
+                            : taskList.OrderByDescending(task => priorityOrder[task.Priority]); 
+                        break;
+
+                    case "Deadline":
+                        sortedTasks = sortOrder == "Ascending"
+                            ? taskList.OrderBy(task => DateTime.Parse(task.Deadline))
+                            : taskList.OrderByDescending(task => DateTime.Parse(task.Deadline));
+                        break;
+
+                    default:
+                        MessageBox.Show($"Sorting by {filterType} is not supported.", "Sort Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
+
+                TaskList.Clear();
+                foreach (var task in sortedTasks)
+                {
+                    TaskList.Add(task);
+                }
+            }
+
+        private void FilterDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FilterDropdown.SelectedItem is ListBoxItem selectedItem)
+            {
+                string filterType = selectedItem.Content.ToString();
+
+                switch (filterType)
+                {
+
+                    case "PRIORITY":
+                        SortTasks("Priority", "Descending"); 
+                        break;
+
+                    case "DEADLINE":
+                        SortTasks("Deadline", "Ascending"); 
+                        break;
+
+                    default:
+                        MessageBox.Show("Unknown filter type selected.", "Filter Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
                 }
             }
         }
@@ -351,5 +490,26 @@ namespace Task_Manager
             TaskListView.Visibility = Visibility.Collapsed;
             EditTaskView.Visibility = Visibility.Visible;
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim().ToLower(); // Get the search text and convert to lowercase
+
+            // Clear the current task list
+            TaskList.Clear();
+
+            // Filter tasks based on the search text
+            var filteredTasks = _allTasks.Where(task =>
+                task.TaskName.ToLower().Contains(searchText) ||
+                task.Description.ToLower().Contains(searchText)).ToList();
+
+            // Add filtered tasks to the TaskList
+            foreach (var task in filteredTasks)
+            {
+                TaskList.Add(task);
+            }
+        }
     }
+    
+
 }

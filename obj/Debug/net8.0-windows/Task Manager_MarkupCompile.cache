@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\DELL\OneDrive\Desktop\Task-Manager\obj\Debug\net8.0-windows\
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\
 Task_Manager
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\DELL\OneDrive\Desktop\Task-Manager\App.xaml
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\App.xaml
 3-164757198
 
 8-1121041926
-2091623960436
+209278430341
 AddWeeklyTasks.xaml;MainWindow.xaml;TaskDashboard.xaml;
 
 False

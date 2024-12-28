@@ -242,3 +242,47 @@ C:\Users\DELL\OneDrive\Desktop\Task-Manager\obj\Debug\net8.0-windows\refint\Task
 C:\Users\DELL\OneDrive\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.pdb
 C:\Users\DELL\OneDrive\Desktop\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
 C:\Users\DELL\OneDrive\Desktop\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.csproj.AssemblyReference.cache
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\MainWindow.baml
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\AddWeeklyTasks.g.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\TaskDashboard.g.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\App.g.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.cache
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.lref
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\refint\Task Manager.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.pdb
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Task Manager.exe
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Task Manager.deps.json
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Task Manager.runtimeconfig.json
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Task Manager.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Task Manager.pdb
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Google.Protobuf.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\K4os.Compression.LZ4.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\K4os.Hash.xxHash.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\MySql.Data.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\MySqlConnector.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\ZstdSharp.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\AddWeeklyTasks.baml
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\TaskDashboard.baml
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.g.resources
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfoInputs.cache
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfo.cs
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.csproj.CoreCompileInputs.cache
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.sourcelink.json
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Man.74AF0842.Up2Date
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
+C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
