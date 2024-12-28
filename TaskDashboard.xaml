@@ -394,7 +394,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="TaskListTable" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
+                        <DataGrid FontSize="14" x:Name="TaskListTable" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
                       Background="White" BorderBrush="Transparent" BorderThickness="0" 
                       RowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="#EAE7E7" 
                       VerticalGridLinesBrush="#EAE7E7" Margin="10">
@@ -427,7 +427,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Width="20" Height="20" Content="✎" FontSize="12" Background="Transparent" 
-                BorderBrush="Transparent" Foreground="Black" Cursor="Hand" />
+                BorderBrush="Transparent" Foreground="Black" Cursor="Hand" Click="Edit_task_Click"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -470,13 +470,20 @@
                                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" />
 
                                 <!-- Checkbox -->
-                                <DataGridTemplateColumn Width="50">
+                                <DataGridTemplateColumn Header="Status" Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <CheckBox x:Name="task_status"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding StatusBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Checked="TaskStatus_Checked"
+                      Unchecked="TaskStatus_Unchecked"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+
+
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button x:Name="CreateTaskButton" Grid.Row="1" Style="{StaticResource CreateButtonStyle}" Content="CREATE TASK"
@@ -577,6 +584,7 @@
                     </Grid>
                 </Border>
             </Grid>
+            <!--Edit Task-->
             <Grid x:Name="EditTaskView" Grid.Row="1" Background="#ECF7FF" Visibility="Collapsed">
                 <Border Background="#F3FAFF" Width="1035" CornerRadius="12" Margin="25" Padding="10">
                     <Grid>

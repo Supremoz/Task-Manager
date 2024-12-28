@@ -74,7 +74,9 @@ namespace Task_Manager
                             due_date DATE,
                             category ENUM('Work', 'Personal'),
                             description TEXT,
-                            priority ENUM('Low', 'Medium', 'High')
+                            priority ENUM('Low', 'Medium', 'High'),
+                            status TINYINT(1) DEFAULT 0
+
                         )";
 
                             using (MySqlCommand taskCmd = new MySqlCommand(taskTableQuery, connection))
