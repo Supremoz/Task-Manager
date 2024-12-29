@@ -44,6 +44,7 @@ namespace Task_Manager
         // Define TaskItem class for DataGrid
         public class TaskItem : INotifyPropertyChanged
         {
+            public int TaskId { get; set; } // Unique Task ID from database
             public string TaskName { get; set; }
             public string Description { get; set; }
             public string Priority { get; set; }
@@ -80,6 +81,7 @@ namespace Task_Manager
         }
 
 
+
         private void CategoryDropdownButton_Click(object sender, RoutedEventArgs e)
         {
             // Toggle the visibility of the popup
@@ -101,7 +103,7 @@ namespace Task_Manager
                 try
                 {
                     connection.Open();
-                    string query = $"SELECT task_name, description, priority, category, due_date, status FROM `{userTaskTable}`";
+                    string query = $"SELECT id, task_name, description, priority, category, due_date, status FROM {userTaskTable}";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -114,6 +116,7 @@ namespace Task_Manager
                             {
                                 var task = new TaskItem
                                 {
+                                    TaskId = Convert.ToInt32(reader["id"]),
                                     TaskName = reader["task_name"].ToString(),
                                     Description = reader["description"].ToString(),
                                     Priority = reader["priority"].ToString(),
@@ -122,11 +125,13 @@ namespace Task_Manager
                                     Status = Convert.ToInt32(reader["status"]) == 0 ? "In Progress" : "Completed"
                                 };
 
-                                TaskList.Add(task);
                                 _allTasks.Add(task);
                             }
                         }
                     }
+
+                    // Reorder tasks after loading
+                    ReorderTaskList();
                 }
                 catch (MySqlException ex)
                 {
@@ -147,7 +152,6 @@ namespace Task_Manager
         {
             if (sender is CheckBox checkBox && checkBox.DataContext is TaskItem task)
             {
-                // Check if the interaction is from user click
                 if (checkBox.IsKeyboardFocusWithin || checkBox.IsMouseOver)
                 {
                     var result = MessageBox.Show(
@@ -158,24 +162,25 @@ namespace Task_Manager
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        UpdateTaskStatusInDatabase(task.TaskName, 1);
+                        UpdateTaskStatusInDatabase(task.TaskId, 1);
                         task.Status = "Completed";
+                        checkBox.IsChecked = true;
+
                         MessageBox.Show("Task marked as Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ReorderTaskList(); // Reorder after marking as completed
                     }
                     else
                     {
-                        checkBox.IsChecked = false; // Revert the checkbox if canceled
+                        checkBox.IsChecked = false; // Revert checkbox if canceled
                     }
                 }
             }
         }
 
-
         private void TaskStatus_Unchecked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox checkBox && checkBox.DataContext is TaskItem task)
             {
-                // Check if the interaction is from user click
                 if (checkBox.IsKeyboardFocusWithin || checkBox.IsMouseOver)
                 {
                     var result = MessageBox.Show(
@@ -186,20 +191,39 @@ namespace Task_Manager
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        UpdateTaskStatusInDatabase(task.TaskName, 0);
+                        UpdateTaskStatusInDatabase(task.TaskId, 0);
                         task.Status = "In Progress";
+                        checkBox.IsChecked = false;
+
                         MessageBox.Show("Task is In Progress!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ReorderTaskList(); // Reorder after marking as in progress
                     }
                     else
                     {
-                        checkBox.IsChecked = true; // Revert the checkbox if canceled
+                        checkBox.IsChecked = true; // Revert checkbox if canceled
                     }
                 }
             }
         }
 
+        private void ReorderTaskList()
+        {
+            // Reorder TaskList: "In Progress" tasks first, then "Completed"
+            var reorderedTasks = _allTasks
+                .OrderBy(task => task.Status == "Completed") // Completed tasks come last
+                .ThenBy(task => task.TaskId) // Maintain original order for tasks with the same status
+                .ToList();
 
-        private void UpdateTaskStatusInDatabase(string taskName, int status)
+            TaskList.Clear();
+
+            foreach (var task in reorderedTasks)
+            {
+                TaskList.Add(task);
+            }
+        }
+
+
+        private void UpdateTaskStatusInDatabase(int taskId, int status)
         {
             string userTaskTable = $"{_username}_tasks";
             string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
@@ -209,12 +233,12 @@ namespace Task_Manager
                 try
                 {
                     connection.Open();
-                    string query = $@"UPDATE `{userTaskTable}` SET status = @status WHERE task_name = @taskName";
+                    string query = $@"UPDATE `{userTaskTable}` SET status = @status WHERE id = @taskId";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@status", status);
-                        cmd.Parameters.AddWithValue("@taskName", taskName);
+                        cmd.Parameters.AddWithValue("@taskId", taskId);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -229,6 +253,7 @@ namespace Task_Manager
                 }
             }
         }
+
 
         // Add Task to Database and Update DataGrid
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)

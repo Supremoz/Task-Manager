@@ -381,7 +381,7 @@ namespace Task_Manager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Task Manager;V1.0.0.0;component/taskdashboard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Task Manager;component/taskdashboard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\TaskDashboard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
