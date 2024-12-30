@@ -281,7 +281,6 @@ namespace Task_Manager
 
             // Use the username to target the correct task table
             string userTaskTable = $"{_username}_tasks";
-
             string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -290,7 +289,7 @@ namespace Task_Manager
                 {
                     connection.Open();
                     string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
-                                      VALUES (@taskName, @dueDate, @description, @category, @priority)";
+                              VALUES (@taskName, @dueDate, @description, @category, @priority)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
@@ -311,10 +310,10 @@ namespace Task_Manager
                                 Description = description,
                                 Priority = priority,
                                 Deadline = dueDate.Value.ToString("yyyy-MM-dd"),
-                                Status = "Pending"
+                                Status = "Pending" // Assuming new tasks start as
                             });
 
-                            ClearTaskFields();
+                            ClearTaskFields(); // Clear the input fields after adding the task
                         }
                         else
                         {
@@ -457,14 +456,13 @@ namespace Task_Manager
             }
         }
 
-        // Helper method to clear task fields after saving
         private void ClearTaskFields()
         {
             TaskNameTxt.Text = string.Empty;
             CustomDatePicker.SelectedDate = null;
             DescriptionTxt.Text = string.Empty;
-            CategoryComboBox.SelectedIndex = 0; // Reset to default selection
-            PriorityComboBox.SelectedIndex = 0; // Reset to default selection
+            CategoryComboBox.SelectedIndex = 0; 
+            PriorityComboBox.SelectedIndex = 0; 
         }
 
         private void DropdownButton_Click(object sender, RoutedEventArgs e)
@@ -504,31 +502,186 @@ namespace Task_Manager
             TaskListView.Visibility = Visibility.Collapsed;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelEditButton_Click(object sender, RoutedEventArgs e)
         {
+            EditTaskView.Visibility = Visibility.Collapsed;
             TaskListView.Visibility = Visibility.Visible;
-            CreateTaskView.Visibility = Visibility.Collapsed;
         }
 
         private void Edit_task_Click(object sender, RoutedEventArgs e)
         {
-            TaskListView.Visibility = Visibility.Collapsed;
-            EditTaskView.Visibility = Visibility.Visible;
+            if (TaskListTable.SelectedItem is TaskItem selectedTask)
+            {
+                TaskName.Text = selectedTask.TaskName; 
+                EditDescriptionTxt.Text = selectedTask.Description;
+
+                var categoryItem = EditCategoryComboBox.Items
+                    .OfType<ComboBoxItem>()
+                    .FirstOrDefault(item => item.Content.ToString() == selectedTask.Category);
+                EditCategoryComboBox.SelectedItem = categoryItem;
+
+                var priorityItem = EditPriorityComboBox.Items
+                    .OfType<ComboBoxItem>()
+                    .FirstOrDefault(item => item.Content.ToString() == selectedTask.Priority);
+                EditPriorityComboBox.SelectedItem = priorityItem;
+
+                if (DateTime.TryParse(selectedTask.Deadline, out DateTime dueDate))
+                {
+                    EditCustomDatePicker.SelectedDate = dueDate;
+                }
+
+                EditTaskView.Visibility = Visibility.Visible;
+                TaskListView.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MessageBox.Show("No task selected for editing.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (TaskListTable.SelectedItem is TaskItem selectedTask)
+            {
+                selectedTask.TaskName = TaskName.Text.Trim();
+                selectedTask.Description = EditDescriptionTxt.Text.Trim();
+                selectedTask.Category = (EditCategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                selectedTask.Priority = (EditPriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                selectedTask.Deadline = EditCustomDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
+
+                UpdateTaskInDatabase(selectedTask);
+
+                ReorderTaskList();
+
+                EditTaskView.Visibility = Visibility.Collapsed;
+                TaskListView.Visibility = Visibility.Visible;
+
+                MessageBox.Show("Task updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (TaskListTable.SelectedItem is TaskItem selectedTask)
+            {
+                var result = MessageBox.Show(
+                    $"Are you sure you want to delete the task '{selectedTask.TaskName}'?",
+                    "Confirm Deletion",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    DeleteTaskFromDatabase(selectedTask.TaskId);
+                    _allTasks.Remove(selectedTask);
+                    ReorderTaskList();
+
+                    EditTaskView.Visibility = Visibility.Collapsed;
+                    TaskListView.Visibility = Visibility.Visible;
+
+                    MessageBox.Show("Task deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+        private void UpdateTaskInDatabase(TaskItem task)
+        {
+            string userTaskTable = $"{_username}_tasks";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = $@"UPDATE `{userTaskTable}` 
+                              SET task_name = @taskName, 
+                                  description = @description, 
+                                  priority = @priority, 
+                                  category = @category, 
+                                  due_date = @dueDate 
+                              WHERE id = @taskId";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@taskName", task.TaskName);
+                        cmd.Parameters.AddWithValue("@description", task.Description);
+                        cmd.Parameters.AddWithValue("@priority", task.Priority);
+                        cmd.Parameters.AddWithValue("@category", task.Category);
+                        cmd.Parameters.AddWithValue("@dueDate", task.Deadline);
+                        cmd.Parameters.AddWithValue("@taskId", task.TaskId);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void DeleteTaskFromDatabase(int taskId)
+        {
+            string userTaskTable = $"{_username}_tasks";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = $@"DELETE FROM `{userTaskTable}` WHERE id = @taskId";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@taskId", taskId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void TaskListTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TaskListTable.SelectedItem is TaskItem selectedTask)
+            {
+                TaskName.Text = selectedTask.TaskName;
+                EditDescriptionTxt.Text = selectedTask.Description;
+                EditCategoryComboBox.SelectedItem = EditCategoryComboBox.Items
+                    .Cast<ComboBoxItem>()
+                    .FirstOrDefault(item => item.Content.ToString() == selectedTask.Category);
+                EditPriorityComboBox.SelectedItem = EditPriorityComboBox.Items
+                    .Cast<ComboBoxItem>()
+                    .FirstOrDefault(item => item.Content.ToString() == selectedTask.Priority);
+
+                if (DateTime.TryParse(selectedTask.Deadline, out DateTime dueDate))
+                {
+                    EditCustomDatePicker.SelectedDate = dueDate;
+                }
+
+                EditTaskView.Visibility = Visibility.Visible;
+                TaskListView.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = SearchTextBox.Text.Trim().ToLower(); // Get the search text and convert to lowercase
+            string searchText = SearchTextBox.Text.Trim().ToLower(); 
 
-            // Clear the current task list
             TaskList.Clear();
 
-            // Filter tasks based on the search text
             var filteredTasks = _allTasks.Where(task =>
                 task.TaskName.ToLower().Contains(searchText) ||
                 task.Description.ToLower().Contains(searchText)).ToList();
 
-            // Add filtered tasks to the TaskList
             foreach (var task in filteredTasks)
             {
                 TaskList.Add(task);
