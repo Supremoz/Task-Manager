@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -25,14 +26,19 @@ namespace Task_Manager
             InitializeComponent();
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            DropShadowEffect shadowEffect = new DropShadowEffect()
+            {
+                BlurRadius = 10,
+                ShadowDepth = 2,
+                Color = Color.FromRgb(136, 136, 136)
+            }; // Adjust the color if needed
 
+            // Apply the effect to the DashboardBtn
+            DashboardBtn.Effect = shadowEffect;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

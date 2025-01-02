@@ -5,9 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="AddWeeklyTasks" Height="470" Width="803" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+               Title="Task Manager" Height="770" Width="1400" MinHeight="385" MinWidth="700" WindowStartupLocation="CenterScreen" Icon="/Resources/logo.png" 
+        Background="#F8FCFF" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MouseOverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#DAEAFA"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="4">
+                            <!-- Set your desired corner radius here -->
+                            <ContentPresenter 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center" 
+                        Content="{TemplateBinding Content}" 
+                        ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#80BFFF"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Foreground" Value="#000000"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="#888888"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CreateButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans Bold"/>
+            <Setter Property="Background" Value="#BFD1E3"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="#BFD1E3"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AdminViewButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans Bold"/>
             <Setter Property="Background" Value="#BFD1E3"/>
@@ -21,9 +104,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" 
-                    CornerRadius="10">
+            BorderBrush="{TemplateBinding BorderBrush}" 
+            BorderThickness="{TemplateBinding BorderThickness}" 
+            CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -31,75 +114,287 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#ECF7FF">
-        <Border Background="#F3FAFF" Width="673" CornerRadius="12" Margin="65,60,65,28">
-            <Grid>
+    <Grid Margin="30,30,30,30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Background="#ECF7FF" Margin="0" BorderThickness="1" CornerRadius="12" Height="690">
+            <!-- Profile Section -->
+            <Border Background="#ECF7FF" Margin="0" CornerRadius="12" Height="680">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <StackPanel Margin="0" VerticalAlignment="Top">
+                    <!-- Profile Picture -->
+                    <Border Width="100" Height="100" BorderThickness="1" CornerRadius="50" Margin="0,15,0,5" BorderBrush="Black">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Resources/side_user.png" Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+
+                    <!-- User Name -->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
+                        <TextBlock FontFamily="/Fonts/#Roboto Slab Regular" Text="Sara Duterte" FontSize="18" Foreground="#444" Margin="0,0,5,0"/>
+                        <TextBlock FontFamily="/Fonts/#Roboto Slab Light" Text="Admin" FontSize="12" Foreground="#444" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Dashboard -->
+                    <Border BorderThickness="1" CornerRadius="13" Margin="20,15,25,0" Padding="5" HorizontalAlignment="Left">
+                        <Button x:Name="DashboardBtn" Style="{StaticResource MouseOverButtonStyle}" Height="38" Width="170" Cursor="Hand" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0,0,0">
+                                <Image Source="/Resources/side_dashboard.png" Width="20" Height="20" Margin="0,0,10,0">
+                                    <Image.RenderTransform>
+                                        <ScaleTransform x:Name="DashboardImageScale" ScaleX="1" ScaleY="1" />
+                                    </Image.RenderTransform>
+                                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                                </Image>
+                                <TextBlock Text="Dashboard" FontSize="17" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DashboardImageScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="DashboardImageScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DashboardImageScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="DashboardImageScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Border>
+
+                    <!-- Profile -->
+                    <Border BorderThickness="1" CornerRadius="13" Margin="20,0,25,0" Padding="5">
+                        <Button x:Name="ProfileBtn" Style="{StaticResource MouseOverButtonStyle}" Height="38" Cursor="Hand" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                                <Image Source="/Resources/side_admin.png" Width="20" Height="20" Margin="0,2,10,0">
+                                    <Image.RenderTransform>
+                                        <ScaleTransform x:Name="AdminImageScale" ScaleX="1" ScaleY="1" />
+                                    </Image.RenderTransform>
+                                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                                </Image>
+                                <TextBlock Text="Admin" FontSize="17" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="AdminImageScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="AdminImageScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="AdminImageScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="AdminImageScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Border>
+
+                    <!-- Logout -->
+                    <Border BorderThickness="1" CornerRadius="13" Margin="20,0,25,0" Padding="5">
+                        <Button x:Name="LogoutBtn" Style="{StaticResource MouseOverButtonStyle}" Height="38" Cursor="Hand" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                                <Image Source="/Resources/side_logout.png" Width="20" Height="20" Margin="0,2,10,0">
+                                    <Image.RenderTransform>
+                                        <ScaleTransform x:Name="LogoutImageScale" ScaleX="1" ScaleY="1" />
+                                    </Image.RenderTransform>
+                                    <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                                </Image>
+                                <TextBlock Text="Logout" FontSize="17" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="LogoutImageScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="LogoutImageScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="LogoutImageScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.3"/>
+                                            <DoubleAnimation Storyboard.TargetName="LogoutImageScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.3"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Border>
+
+        <!-- DASHBOARD SCREEN VIEW-->
+        <Grid Grid.Column="1" Margin="15,0,0,0" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="73"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Search Bar || 1-1-->
+            <Border Margin="8,8,0,0" Background="#DEECF8" CornerRadius="10" Width="420" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel Background="Transparent" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="/Resources/Leading-icon.png" Width="45"/>
+                    <TextBox FontFamily="/Fonts/#Pontano Sans" FontSize="20" VerticalAlignment="Center" Background="#DEECF8" Width="328" Height="42" BorderBrush="Transparent" VerticalContentAlignment="Center"/>
+                    <Button Background="#DEECF8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Height="45" Padding="0" BorderBrush="Transparent">
+                        <Image Source="/Resources/filter.png" Width="30"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+            <!-- DASHBOARD TASK VIEW-->
+            <Grid x:Name="TaskListView" Grid.Row="1" Background="#ECF7FF" Visibility="Visible" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="155"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Background="White" Margin="21.5,11,21.5,10" CornerRadius="10">
+                <!--FILTER BUTTON-->
+                <TextBlock x:Name="FilterButtonRow" Grid.Row="0" Width="160" Height="30" HorizontalAlignment="Left" Margin="45,15,0,0" FontFamily="/Fonts/#Pontano Sans" FontSize="22.5">Users</TextBlock>
+                <!--TASK LIST TABLE-->
+                <Border x:Name="ListCreateButtonRow" Grid.Row="1" Background="#F3FAFF" Margin="30,5,20,15" CornerRadius="5" Padding="10">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,8,0,10">
-                            <TextBlock Text="Task Name" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="16"  Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="#717070"/>
-                            <TextBox x:Name="TaskName" Text="Assignment" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="18"  Width="328" HorizontalAlignment="Left" Height="30" BorderBrush="Transparent"/>
-                            <TextBlock Text="Category" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="16"  Width="90" VerticalAlignment="Stretch" HorizontalAlignment="Left" Foreground="#717070" Margin="0,0,0,0"/>
-                            <ComboBox x:Name="CategoryComboBox" FontFamily="/Fonts/#Pontano Sans Medium" Width="220" Background="White" BorderBrush="White" BorderThickness="0" Padding="4" VerticalAlignment="Stretch" HorizontalAlignment="Left" FontSize="18">
-                                <ComboBoxItem Content="Select Category" IsSelected="True"/>
-                                <ComboBoxItem Content="Work"/>
-                                <ComboBoxItem Content="Personal"/>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,8,10,10">
-                            <TextBlock Text="Due Date" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="16"  Width="85" HorizontalAlignment="Right" VerticalAlignment="Stretch" Foreground="#717070"/>
-                            <DatePicker x:Name="CustomDatePicker" FontFamily="/Fonts/#Pontano Sans Medium" Width="158"  Background="White"  BorderBrush="White" 
-                                        BorderThickness="0" Padding="3"  HorizontalAlignment="Right"  FontSize="16"  HorizontalContentAlignment="Center">
-                                <DatePicker.Resources>
-                                    <Style TargetType="DatePickerTextBox">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="DatePickerTextBox">
-                                                    <TextBox x:Name="PART_TextBox"
-                                                                 Text="{Binding ElementName=CustomDatePicker, Path=SelectedDate, StringFormat=MM-dd-yy, TargetNullValue=CHOOSE DATE}" 
-                                                                 Background="White" 
-                                                                 Foreground="Black"
-                                                                 IsReadOnly="True" 
-                                                                 BorderBrush="Transparent" 
-                                                                 HorizontalContentAlignment="Center" 
-                                                                 VerticalContentAlignment="Center"/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DatePicker.Resources>
-                            </DatePicker>
-                            <TextBlock Text="Category" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="16"  Width="90" HorizontalAlignment="Right" Foreground="#717070" Margin="0,3,0,0"/>
-                            <ComboBox x:Name="PriorityComboBox" FontFamily="/Fonts/#Pontano Sans Medium" Width="210" Background="White" BorderBrush="White" BorderThickness="0" Padding="4" HorizontalAlignment="Right" FontSize="18" SelectedIndex="0">
-                                <ComboBoxItem Content="TYPE OF PRIORITY" IsSelected="True" Foreground="Black"/>
-                                <ComboBoxItem Content="High" Foreground="Red"/>
-                                <ComboBoxItem Content="Moderate" Foreground="Orange"/>
-                                <ComboBoxItem Content="Low" Foreground="Green"/>
-                            </ComboBox>
-                        </StackPanel>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="TaskListTable" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
+                      Background="White" BorderBrush="Transparent" BorderThickness="0" 
+                      RowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="#EAE7E7" 
+                      VerticalGridLinesBrush="#EAE7E7" Margin="10">
+                            <DataGrid.Resources>
+                                <!-- Header Style -->
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="FontSize" Value="18"/>
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="0,5,0,5"/>
+                                    <Setter Property="BorderThickness" Value="1,0,1,3" />
+                                    <Setter Property="BorderBrush" Value="#EAE7E7" />
+                                </Style>
+                                <!-- Row Style -->
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="White" />
+                                </Style>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="Padding" Value="5" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGrid.Resources>
 
+                            <DataGrid.Columns>
+                                <!-- Username -->
+                                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
+
+                                <!-- No. of Task -->
+                                <DataGridTextColumn Header="Number of Tasks" Binding="{Binding Tasks}" Width="*"/>
+
+                                <!-- Priority -->
+                                <DataGridTemplateColumn Width="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource AdminViewButtonStyle}" Content="View" Width="35" Height="22" Cursor="Hand"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </Border>
-
-                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0">
-                    <TextBlock Text="Description" FontFamily="/Fonts/#Pontano Sans Medium"  FontSize="16"  Width="110" HorizontalAlignment="Left" Foreground="#717070" Margin="20,0,0,0"/>
-                    <Border Width="630" Height="160" CornerRadius="10" Background="White" Padding="0" Margin="0,2,0,6.5" BorderBrush="White" BorderThickness="1">
-                        <TextBox x:Name="DescriptionTxt" Width="630" Height="160" Padding="15,5,15,5" FontSize="20" TextWrapping="Wrap" Background="Transparent" BorderThickness="0"/>
-                    </Border>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,40,0">
-                        <Button x:Name="DeleteButton" Style="{StaticResource CustomButtonStyle}" Content="DELETE" Width="87" Height="33" Margin="0,0,20,0" Cursor="Hand" Click="DeleteButton_Click"/>
-                        <Button x:Name="SaveButton" Style="{StaticResource CustomButtonStyle}" Content="SAVE" Width="87" Height="33" Cursor="Hand" Click="SaveButton_Click"/>
-                    </StackPanel>
-                </StackPanel>
             </Grid>
-        </Border>
+
+            <!-- USER TASK  LIST VIEW-->
+            <Grid Grid.Row="1" Margin="15,0,0,0" Visibility="Collapsed">
+                <Border Padding="29,16,39,0" Background="#ECF7FF" Margin="0" CornerRadius="12" Height="617.5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" FontFamily="/Fonts/#Pontano Sans Medium" FontSize="23" Margin="0,0,0,0">Task Lists</TextBlock>
+                        <Border Grid.Row="1" Background="White" CornerRadius="8" Margin="10,15,0,35">
+                            <DataGrid x:Name="TaskListTableTaskSummary" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" 
+                          Background="White" BorderBrush="Transparent" BorderThickness="0" 
+                          RowHeight="40" HeadersVisibility="Column" HorizontalGridLinesBrush="#EAE7E7" 
+                          VerticalGridLinesBrush="#EAE7E7" Margin="10">
+                                <DataGrid.Resources>
+                                    <!-- Header Style -->
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="Background" Value="White" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                        <Setter Property="FontFamily" Value="/Fonts/#Pontano Sans"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="0,5,0,5"/>
+                                        <Setter Property="BorderThickness" Value="1,0,1,3" />
+                                        <Setter Property="BorderBrush" Value="#EAE7E7" />
+                                    </Style>
+                                    <!-- Row Style -->
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="Background" Value="White" />
+                                    </Style>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Padding" Value="5" />
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <DataGrid.Columns>
+                                    <!-- Task Name -->
+                                    <DataGridTextColumn Header="Task Name" Binding="{Binding TaskName}" Width="250"/>
+
+                                    <!-- Description -->
+                                    <DataGridTextColumn Header="Description" Binding="{Binding Category}" Width="270"/>
+
+                                    <!-- Priority -->
+                                    <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="Red" />
+                                                <Setter Property="FontWeight" Value="Bold" />
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+                                    <!-- Deadline -->
+                                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="*" />
+
+                                    <!-- Status -->
+                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                        <Button Grid.Row="0" Style="{StaticResource CreateButtonStyle}" Content="BACK" Width="70" Height="35"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

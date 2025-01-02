@@ -133,27 +133,50 @@ namespace Task_Manager
                 {
                     connection.Open();
 
-                    string query = "SELECT password FROM users WHERE username = @username";
+                    bool isAdmin = false;
+                    string query = "SELECT password FROM admins WHERE username = @username";
+
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@username", username);
 
-                        string storedHashedPassword = cmd.ExecuteScalar()?.ToString();
+                        string adminPassword = cmd.ExecuteScalar()?.ToString();
 
-                        if (storedHashedPassword != null && storedHashedPassword == HashPassword(password))
+                        if (adminPassword != null && adminPassword == password)
                         {
-                            MessageBox.Show("Login successful.");
+                            isAdmin = true;
+                            MessageBox.Show("Admin login successful.");
 
-                            UserData userData = new UserData();
-                            userData.Username = username;
-
-                            TaskDashboard loginWindow = new TaskDashboard(userData);
-                            loginWindow.Show();
-                            this.Close(); // Close the current MainWindow
+                            AddWeeklyTasks adminWindow = new AddWeeklyTasks();
+                            adminWindow.Show();
+                            this.Close();
                         }
-                        else
+                    }
+
+                    if (!isAdmin)
+                    {
+                        query = "SELECT password FROM users WHERE username = @username";
+                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
                         {
-                            MessageBox.Show("Invalid username or password.");
+                            cmd.Parameters.AddWithValue("@username", username);
+
+                            string userPassword = cmd.ExecuteScalar()?.ToString();
+
+                            if (userPassword != null && userPassword == HashPassword(password))
+                            {
+                                MessageBox.Show("User login successful.");
+
+                                UserData userData = new UserData();
+                                userData.Username = username;
+
+                                TaskDashboard userWindow = new TaskDashboard(userData);
+                                userWindow.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid username or password.");
+                            }
                         }
                     }
                 }
