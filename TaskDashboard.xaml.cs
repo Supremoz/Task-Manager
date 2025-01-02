@@ -2,14 +2,18 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using static Task_Manager.TaskDashboard;
+using System.IO;
+
 
 namespace Task_Manager
 {
@@ -27,6 +31,7 @@ namespace Task_Manager
         // ObservableCollection to hold tasks dynamically
         public ObservableCollection<TaskItem> TaskList { get; set; } = new ObservableCollection<TaskItem>();
 
+
         public TaskDashboard(UserData userData)
         {
             InitializeComponent();
@@ -39,12 +44,13 @@ namespace Task_Manager
             TaskListTable.ItemsSource = TaskList; // Bind ObservableCollection to DataGrid
 
             LoadTasks(); // Load tasks into the DataGrid on startup
+            LoadTasksToGrid();
         }
 
         // Define TaskItem class for DataGrid
         public class TaskItem : INotifyPropertyChanged
         {
-            public int TaskId { get; set; } // Unique Task ID from database
+            public int TaskId { get; set; }
             public string TaskName { get; set; }
             public string Description { get; set; }
             public string Priority { get; set; }
@@ -59,7 +65,7 @@ namespace Task_Manager
                 {
                     _status = value;
                     OnPropertyChanged(nameof(Status));
-                    OnPropertyChanged(nameof(StatusBool)); // Notify checkbox binding
+                    OnPropertyChanged(nameof(StatusBool));
                 }
             }
 
@@ -73,13 +79,50 @@ namespace Task_Manager
                 }
             }
 
+            private Brush _priorityColor;
+            public Brush PriorityColor
+            {
+                get => _priorityColor;
+                set
+                {
+                    _priorityColor = value;
+                    OnPropertyChanged(nameof(PriorityColor));
+                }
+            }
+
             public event PropertyChangedEventHandler PropertyChanged;
             protected virtual void OnPropertyChanged(string propertyName)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+
+            // Set the priority color based on the priority level
+            public void SetPriorityColor()
+            {
+                switch (Priority.ToLower())
+                {
+                    case "high":
+                        PriorityColor = Brushes.Red;
+                        break;
+                    case "in progress":
+                        PriorityColor = Brushes.Orange;
+                        break;
+                    case "low":
+                        PriorityColor = Brushes.Green;
+                        break;
+                    default:
+                        PriorityColor = Brushes.Orange; // Default color if no match
+                        break;
+                }
+            }
         }
 
+
+        private MySqlConnection GetDatabaseConnection()
+        {
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            return new MySqlConnection(connectionString);
+        }
 
 
         private void CategoryDropdownButton_Click(object sender, RoutedEventArgs e)
@@ -93,27 +136,30 @@ namespace Task_Manager
         // Load tasks from the database
         private void LoadTasks()
         {
-            _isLoading = true; // Start loading mode to prevent checkbox events
+            _isLoading = true;
 
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string query = $"SELECT id, task_name, description, priority, category, due_date, status FROM {userTaskTable}";
+                    string query = $"SELECT id, task_name, description, priority, category, due_date, status FROM `{userTaskTable}`";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            TaskList.Clear(); // Clear current task list
+                            TaskList.Clear();
                             _allTasks.Clear();
 
                             while (reader.Read())
                             {
+                                DateTime dueDate = Convert.ToDateTime(reader["due_date"]);
+                                string status = reader["status"].ToString();
+
                                 var task = new TaskItem
                                 {
                                     TaskId = Convert.ToInt32(reader["id"]),
@@ -121,21 +167,37 @@ namespace Task_Manager
                                     Description = reader["description"].ToString(),
                                     Priority = reader["priority"].ToString(),
                                     Category = reader["category"].ToString(),
-                                    Deadline = Convert.ToDateTime(reader["due_date"]).ToString("yyyy-MM-dd"),
-                                    Status = Convert.ToInt32(reader["status"]) == 0 ? "In Progress" : "Completed"
+                                    Deadline = dueDate.ToString("yyyy-MM-dd"),
+                                    Status = status
                                 };
+
+                                // Additional dynamic status mapping (if needed)
+                                if (status == "In Progress" && dueDate < DateTime.Now)
+                                {
+                                    task.Status = "Overdue";
+                                }
 
                                 _allTasks.Add(task);
                             }
                         }
                     }
 
-                    // Reorder tasks after loading
+                    // Count tasks by status after loading
+                    int completedCount = _allTasks.Count(t => t.Status == "Completed");
+                    int inProgressCount = _allTasks.Count(t => t.Status == "In Progress");
+                    int notStartedCount = _allTasks.Count(t => t.Status == "Pending");
+                    int overdueCount = _allTasks.Count(t => t.Status == "Overdue");
+
+                    // Update TextBlocks on UI thread
+                    Dispatcher.Invoke(() =>
+                    {
+                        text_completed.Text = completedCount.ToString();
+                        text_inprogress.Text = inProgressCount.ToString();
+                        text_notstarted.Text = notStartedCount.ToString();
+                        text_overdue.Text = overdueCount.ToString();
+                    });
+
                     ReorderTaskList();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception ex)
                 {
@@ -143,10 +205,70 @@ namespace Task_Manager
                 }
                 finally
                 {
-                    _isLoading = false; // End loading mode
+                    _isLoading = false;
                 }
             }
         }
+        private void LoadTasksToGrid()
+        {
+            string userTaskTable = $"{_username}_tasks";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = $"SELECT id, task_name, description, priority, category, due_date, status FROM `{userTaskTable}`";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            List<TaskItem> fetchedTasks = new List<TaskItem>();
+
+                            while (reader.Read())
+                            {
+                                DateTime dueDate = Convert.ToDateTime(reader["due_date"]);
+                                string status = reader["status"].ToString();
+
+                                var task = new TaskItem
+                                {
+                                    TaskId = Convert.ToInt32(reader["id"]),
+                                    TaskName = reader["task_name"].ToString(),
+                                    Description = reader["description"].ToString(),
+                                    Priority = reader["priority"].ToString(),
+                                    Category = reader["category"].ToString(),
+                                    Deadline = dueDate.ToString("yyyy-MM-dd"),
+                                    Status = status
+                                };
+
+                                task.SetPriorityColor(); // Set the priority color based on the priority
+
+                                // Add the task to the list
+                                fetchedTasks.Add(task);
+                            }
+
+                            // Update the DataGrid (TaskListTableTaskSummary) directly with the fetched tasks
+                            TaskListTableTaskSummary.ItemsSource = fetchedTasks;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+
+
+        private int CalculateOverdueTasks()
+        {
+            return _allTasks.Count(t =>
+                t.Status == "In Progress" && DateTime.Parse(t.Deadline) < DateTime.Now);
+        }
+
 
         private void TaskStatus_Checked(object sender, RoutedEventArgs e)
         {
@@ -155,27 +277,38 @@ namespace Task_Manager
                 if (checkBox.IsKeyboardFocusWithin || checkBox.IsMouseOver)
                 {
                     var result = MessageBox.Show(
-                        $"Mark task '{task.TaskName}' as Completed?",
-                        "Confirm Task Completion",
-                        MessageBoxButton.YesNo,
+                        $"Would you like to mark task '{task.TaskName}' as:\n\n" +
+                        "Yes → Completed\nNo → In Progress",
+                        "Confirm Task Status",
+                        MessageBoxButton.YesNoCancel,
                         MessageBoxImage.Question);
 
-                    if (result == MessageBoxResult.Yes)
+                    switch (result)
                     {
-                        UpdateTaskStatusInDatabase(task.TaskId, 1);
-                        task.Status = "Completed";
-                        checkBox.IsChecked = true;
+                        case MessageBoxResult.Yes:
+                            UpdateTaskStatusInDatabase(task.TaskId, "Completed");
+                            task.Status = "Completed";
+                            checkBox.IsChecked = true;
+                            MessageBox.Show("Task marked as Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
 
-                        MessageBox.Show("Task marked as Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ReorderTaskList(); // Reorder after marking as completed
+                        case MessageBoxResult.No:
+                            UpdateTaskStatusInDatabase(task.TaskId, "In Progress");
+                            task.Status = "In Progress";
+                            checkBox.IsChecked = false;
+                            MessageBox.Show("Task marked as In Progress!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
+
+                        case MessageBoxResult.Cancel:
+                            checkBox.IsChecked = !checkBox.IsChecked; // Revert to the previous state
+                            break;
                     }
-                    else
-                    {
-                        checkBox.IsChecked = false; // Revert checkbox if canceled
-                    }
+
+                    ReorderTaskList(); // Refresh the task list after status change
                 }
             }
         }
+
 
         private void TaskStatus_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -183,28 +316,20 @@ namespace Task_Manager
             {
                 if (checkBox.IsKeyboardFocusWithin || checkBox.IsMouseOver)
                 {
-                    var result = MessageBox.Show(
-                        $"Mark task '{task.TaskName}' as In Progress?",
-                        "Confirm Task Status",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Question);
+                    // Automatically set task status to "In Progress" both in the database and locally
+                    UpdateTaskStatusInDatabase(task.TaskId, "In Progress");
+                    task.Status = "In Progress";
+                    checkBox.IsChecked = false;
 
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        UpdateTaskStatusInDatabase(task.TaskId, 0);
-                        task.Status = "In Progress";
-                        checkBox.IsChecked = false;
+                    MessageBox.Show("Task marked as In Progress!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        MessageBox.Show("Task is In Progress!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ReorderTaskList(); // Reorder after marking as in progress
-                    }
-                    else
-                    {
-                        checkBox.IsChecked = true; // Revert checkbox if canceled
-                    }
+                    ReorderTaskList(); // Refresh the task list after status change
+
                 }
             }
         }
+
+
 
         private void ReorderTaskList()
         {
@@ -226,7 +351,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(int taskId, int status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -257,67 +382,85 @@ namespace Task_Manager
 
         // Add Task to Database and Update DataGrid
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+{
+    // Collect data from UI elements
+    string taskName = TaskNameTxt.Text.Trim();
+    DateTime? dueDate = CustomDatePicker.SelectedDate;
+    string description = DescriptionTxt.Text.Trim();
+    string category = (CategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+    string priority = (PriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+    // Validation for empty fields
+    if (string.IsNullOrEmpty(taskName) ||
+        dueDate == null ||
+        string.IsNullOrEmpty(description) ||
+        string.IsNullOrEmpty(category) ||
+        category == "Select Category" ||
+        string.IsNullOrEmpty(priority) ||
+        priority == "TYPE OF PRIORITY")
+    {
+        MessageBox.Show("All fields (Task Name, Due Date, Description, Category, and Priority) must be filled before saving.",
+                        "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+        return;
+    }
+
+    // Validation for past dates
+    if (dueDate.Value.Date < DateTime.Today)
+    {
+        MessageBox.Show("Due Date cannot be in the past. Please select a valid future date.",
+                        "Invalid Due Date", MessageBoxButton.OK, MessageBoxImage.Warning);
+        return;
+    }
+
+    // SQL Query to add task
+    string userTaskTable = $"{_username}_tasks";
+    string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
+                      VALUES (@taskName, @dueDate, @description, @category, @priority)";
+
+    ExecuteNonQuery(query, cmd =>
+    {
+        cmd.Parameters.AddWithValue("@taskName", taskName);
+        cmd.Parameters.AddWithValue("@dueDate", dueDate.Value.ToString("yyyy-MM-dd"));
+        cmd.Parameters.AddWithValue("@description", description);
+        cmd.Parameters.AddWithValue("@category", category);
+        cmd.Parameters.AddWithValue("@priority", priority);
+    }, "Task added successfully!", "Failed to add task.");
+
+    // Add task to the local task list
+    TaskList.Add(new TaskItem
+    {
+        TaskName = taskName,
+        Description = description,
+        Priority = priority,
+        Deadline = dueDate.Value.ToString("yyyy-MM-dd"),
+        Status = "Pending"
+    });
+
+    ClearTaskFields(); // Clear the input fields after adding the task
+    LoadTasks();
+}
+
+
+        // Generalized method for executing database commands
+        private void ExecuteNonQuery(string query, Action<MySqlCommand> parameterize, string successMessage, string errorMessage)
         {
-            // Collect data from UI elements
-            string taskName = TaskNameTxt.Text.Trim();
-            DateTime? dueDate = CustomDatePicker.SelectedDate;
-            string description = DescriptionTxt.Text.Trim();
-            string category = (CategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-            string priority = (PriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-
-            // Validation for empty fields
-            if (string.IsNullOrEmpty(taskName) ||
-                dueDate == null ||
-                string.IsNullOrEmpty(description) ||
-                string.IsNullOrEmpty(category) ||
-                category == "Select Category" ||
-                string.IsNullOrEmpty(priority) ||
-                priority == "TYPE OF PRIORITY")
-            {
-                MessageBox.Show("All fields (Task Name, Due Date, Description, Category, and Priority) must be filled before saving.",
-                                "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Use the username to target the correct task table
-            string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = GetDatabaseConnection())
             {
                 try
                 {
                     connection.Open();
-                    string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
-                              VALUES (@taskName, @dueDate, @description, @category, @priority)";
-
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@taskName", taskName);
-                        cmd.Parameters.AddWithValue("@dueDate", dueDate.Value.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@description", description);
-                        cmd.Parameters.AddWithValue("@category", category);
-                        cmd.Parameters.AddWithValue("@priority", priority);
-
+                        parameterize(cmd);
                         int result = cmd.ExecuteNonQuery();
 
                         if (result > 0)
                         {
-                            MessageBox.Show("Task added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                            TaskList.Add(new TaskItem
-                            {
-                                TaskName = taskName,
-                                Description = description,
-                                Priority = priority,
-                                Deadline = dueDate.Value.ToString("yyyy-MM-dd"),
-                                Status = "Pending" // Assuming new tasks start as
-                            });
-
-                            ClearTaskFields(); // Clear the input fields after adding the task
+                            MessageBox.Show(successMessage, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Failed to add task. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
@@ -338,30 +481,46 @@ namespace Task_Manager
                 string selectedCategory = selectedItem.Content.ToString();
 
                 // Call the method to filter tasks based on the selected category
-                FilterTasks(selectedCategory);
+                FilterTasks("CATEGORY", selectedCategory);
 
                 // Close the popup after selection
                 CategoryDropdownPopup.IsOpen = false;
             }
         }
-        private void FilterTasks(string category)
+
+        private void FilterTasks(string filterType, string filterValue)
         {
             TaskList.Clear(); // Clear the current task list
 
-            // Filter tasks based on the selected category
             var filteredTasks = _allTasks.AsQueryable();
 
-            switch (category)
+            switch (filterType)
             {
-                case "All Tasks":
-                    filteredTasks = _allTasks.AsQueryable(); // Show all tasks
+                case "CATEGORY":
+                    switch (filterValue)
+                    {
+                        case "All Tasks":
+                            filteredTasks = _allTasks.AsQueryable(); // Show all tasks
+                            break;
+                        case "Work":
+                            filteredTasks = filteredTasks.Where(t => t.Category.Equals("Work", StringComparison.OrdinalIgnoreCase));
+                            break;
+                        case "Personal":
+                            filteredTasks = filteredTasks.Where(t => t.Category.Equals("Personal", StringComparison.OrdinalIgnoreCase));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
-                case "Work":
-                    filteredTasks = filteredTasks.Where(t => t.Category.Equals("Work", StringComparison.OrdinalIgnoreCase));
+
+                case "PRIORITY":
+                    filteredTasks = filteredTasks.Where(t => t.Priority.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
                     break;
-                case "Personal":
-                    filteredTasks = filteredTasks.Where(t => t.Category.Equals("Personal", StringComparison.OrdinalIgnoreCase));
+
+                case "DEADLINE":
+                    filteredTasks = filteredTasks.Where(t => t.Deadline == filterValue);
                     break;
+
                 default:
                     break;
             }
@@ -372,65 +531,44 @@ namespace Task_Manager
                 TaskList.Add(task);
             }
         }
-        private void FilterTasks(string filterType, string filterValue)
-        {
-            TaskList.Clear();
 
-            var filteredTasks = _allTasks.AsQueryable();
+        private void SortTasks(string filterType, string sortOrder)
+        {
+            var taskList = _allTasks;
+            IEnumerable<TaskItem> sortedTasks = taskList;
 
             switch (filterType)
             {
-                case "PRIORITY":
-                    filteredTasks = filteredTasks.Where(t => t.Priority.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
+                case "Priority":
+                    var priorityOrder = new Dictionary<string, int>
+            {
+                { "Low", 1 },
+                { "Medium", 2 },
+                { "High", 3 }
+            };
+
+                    sortedTasks = sortOrder == "Ascending"
+                        ? taskList.OrderBy(task => priorityOrder[task.Priority])
+                        : taskList.OrderByDescending(task => priorityOrder[task.Priority]);
                     break;
-                case "DEADLINE":
-                    filteredTasks = filteredTasks.Where(t => t.Deadline == filterValue);
+
+                case "Deadline":
+                    sortedTasks = sortOrder == "Ascending"
+                        ? taskList.OrderBy(task => DateTime.Parse(task.Deadline))
+                        : taskList.OrderByDescending(task => DateTime.Parse(task.Deadline));
+                    break;
+
+                default:
+                    MessageBox.Show($"Sorting by {filterType} is not supported.", "Sort Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
 
-            foreach (var task in filteredTasks)
+            TaskList.Clear();
+            foreach (var task in sortedTasks)
             {
                 TaskList.Add(task);
             }
         }
-
-            private void SortTasks(string filterType, string sortOrder)
-            {
-                var taskList = _allTasks;
-                IEnumerable<TaskItem> sortedTasks = taskList;
-
-                switch (filterType)
-                {
-                    case "Priority":
-                        var priorityOrder = new Dictionary<string, int>
-                {
-                    { "Low", 1 },
-                    { "Medium", 2 },
-                    { "High", 3 }
-                };
-
-                        sortedTasks = sortOrder == "Ascending" 
-                            ? taskList.OrderBy(task => priorityOrder[task.Priority])
-                            : taskList.OrderByDescending(task => priorityOrder[task.Priority]); 
-                        break;
-
-                    case "Deadline":
-                        sortedTasks = sortOrder == "Ascending"
-                            ? taskList.OrderBy(task => DateTime.Parse(task.Deadline))
-                            : taskList.OrderByDescending(task => DateTime.Parse(task.Deadline));
-                        break;
-
-                    default:
-                        MessageBox.Show($"Sorting by {filterType} is not supported.", "Sort Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        break;
-                }
-
-                TaskList.Clear();
-                foreach (var task in sortedTasks)
-                {
-                    TaskList.Add(task);
-                }
-            }
 
         private void FilterDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -440,13 +578,14 @@ namespace Task_Manager
 
                 switch (filterType)
                 {
-
                     case "PRIORITY":
-                        SortTasks("Priority", "Descending"); 
+                        FilterTasks("PRIORITY", "High");
+                        SortTasks("Priority", "Descending");
                         break;
 
                     case "DEADLINE":
-                        SortTasks("Deadline", "Ascending"); 
+                        FilterTasks("DEADLINE", "2025-01-01"); // Example: Filter based on specific deadline
+                        SortTasks("Deadline", "Ascending");
                         break;
 
                     default:
@@ -507,6 +646,22 @@ namespace Task_Manager
             EditTaskView.Visibility = Visibility.Collapsed;
             TaskListView.Visibility = Visibility.Visible;
         }
+        private void TaskSummaryButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditTaskView.Visibility = Visibility.Collapsed;
+            TaskListView.Visibility = Visibility.Collapsed;
+            TaskSummary.Visibility = Visibility.Visible;
+            LoadTasks();
+            LoadTasksToGrid();
+        }
+        private void DashButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TaskListView.Visibility = Visibility.Visible;
+            EditTaskView.Visibility = Visibility.Collapsed;
+            TaskSummary.Visibility = Visibility.Collapsed;
+            CreateTaskView.Visibility = Visibility.Collapsed;
+        }
 
         private void Edit_task_Click(object sender, RoutedEventArgs e)
         {
@@ -542,22 +697,28 @@ namespace Task_Manager
         {
             if (TaskListTable.SelectedItem is TaskItem selectedTask)
             {
+                // Update the TaskItem object with new values
                 selectedTask.TaskName = TaskName.Text.Trim();
                 selectedTask.Description = EditDescriptionTxt.Text.Trim();
                 selectedTask.Category = (EditCategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
                 selectedTask.Priority = (EditPriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
                 selectedTask.Deadline = EditCustomDatePicker.SelectedDate?.ToString("yyyy-MM-dd");
 
-                UpdateTaskInDatabase(selectedTask);
+                // Call the new update method to update the task in the database
+                UpdateTaskInDatabaseNew(selectedTask);
 
+                // Refresh the DataGrid (reorder list or reset the task list)
                 ReorderTaskList();
 
+                // Hide the edit view and show the task list view
                 EditTaskView.Visibility = Visibility.Collapsed;
                 TaskListView.Visibility = Visibility.Visible;
 
                 MessageBox.Show("Task updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (TaskListTable.SelectedItem is TaskItem selectedTask)
@@ -581,10 +742,35 @@ namespace Task_Manager
                 }
             }
         }
-        private void UpdateTaskInDatabase(TaskItem task)
+        private void UpdateTaskStatusInDatabase(int taskId, string status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = $"UPDATE `{userTaskTable}` SET status = @status WHERE id = @taskId";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@status", status);
+                        cmd.Parameters.AddWithValue("@taskId", taskId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void UpdateTaskInDatabaseNew(TaskItem updatedTask)
+        {
+            string userTaskTable = $"{_username}_tasks";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -592,39 +778,35 @@ namespace Task_Manager
                 {
                     connection.Open();
                     string query = $@"UPDATE `{userTaskTable}` 
-                              SET task_name = @taskName, 
-                                  description = @description, 
-                                  priority = @priority, 
-                                  category = @category, 
-                                  due_date = @dueDate 
+                              SET task_name = @taskName, description = @description, category = @category, 
+                                  priority = @priority, due_date = @dueDate
                               WHERE id = @taskId";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@taskName", task.TaskName);
-                        cmd.Parameters.AddWithValue("@description", task.Description);
-                        cmd.Parameters.AddWithValue("@priority", task.Priority);
-                        cmd.Parameters.AddWithValue("@category", task.Category);
-                        cmd.Parameters.AddWithValue("@dueDate", task.Deadline);
-                        cmd.Parameters.AddWithValue("@taskId", task.TaskId);
+                        cmd.Parameters.AddWithValue("@taskName", updatedTask.TaskName);
+                        cmd.Parameters.AddWithValue("@description", updatedTask.Description);
+                        cmd.Parameters.AddWithValue("@category", updatedTask.Category);
+                        cmd.Parameters.AddWithValue("@priority", updatedTask.Priority);
+                        cmd.Parameters.AddWithValue("@dueDate", updatedTask.Deadline);
+                        cmd.Parameters.AddWithValue("@taskId", updatedTask.TaskId);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
-                catch (MySqlException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
+
+
+
         private void DeleteTaskFromDatabase(int taskId)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -687,7 +869,63 @@ namespace Task_Manager
                 TaskList.Add(task);
             }
         }
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Do you want to download your tasks as a CSV file?",
+                "Confirm Export",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                ExportTasksToCsv();
+            }
+        }
+
+        private void ExportTasksToCsv()
+        {
+            // Calculate task counts
+            var dueTasks = _allTasks.Count(t => DateTime.Parse(t.Deadline) < DateTime.Now && t.Status != "Completed");
+            var completedTasks = _allTasks.Count(t => t.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase));
+            var inProgressTasks = _allTasks.Count(t => t.Status.Equals("In Progress", StringComparison.OrdinalIgnoreCase));
+            var pendingTasks = _allTasks.Count(t => t.Status.Equals("Pending", StringComparison.OrdinalIgnoreCase));
+
+            // Create CSV file content
+            StringBuilder csvContent = new StringBuilder();
+
+            // Add header
+            csvContent.AppendLine("Task Name,Description,Priority,Category,Deadline,Status");
+
+            // Add tasks
+            foreach (var task in _allTasks)
+            {
+                csvContent.AppendLine($"{task.TaskName},{task.Description},{task.Priority},{task.Category},{task.Deadline},{task.Status}");
+            }
+
+            // Add task counts summary
+            csvContent.AppendLine();
+            csvContent.AppendLine("TASK COUNTS");
+            csvContent.AppendLine($"Due Tasks: {dueTasks}");
+            csvContent.AppendLine($"Completed Tasks: {completedTasks}");
+            csvContent.AppendLine($"In Progress Tasks: {inProgressTasks}");
+            csvContent.AppendLine($"Pending Tasks: {pendingTasks}");
+
+            // Prompt user to save the file
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "CSV Files (*.csv)|*.csv",
+                FileName = "Tasks.csv"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
+                MessageBox.Show("Tasks exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
     }
-    
+
 
 }

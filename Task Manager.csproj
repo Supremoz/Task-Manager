@@ -44,6 +44,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.1.0" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\arrdown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -53,11 +58,6 @@
     <Resource Include="Resources\refresh.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="9.1.0" />
-    <PackageReference Include="MySqlConnector" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>

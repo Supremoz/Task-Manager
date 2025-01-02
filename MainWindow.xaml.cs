@@ -46,7 +46,7 @@ namespace Task_Manager
             }
 
             string hashedPassword = HashPassword(password);
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -68,16 +68,15 @@ namespace Task_Manager
                         {
                             // Create a unique task table for the user
                             string taskTableQuery = $@"
-                        CREATE TABLE IF NOT EXISTS `{username}_tasks` (
-                            id INT PRIMARY KEY AUTO_INCREMENT,
-                            task_name VARCHAR(100),
-                            due_date DATE,
-                            category ENUM('Work', 'Personal'),
-                            description TEXT,
-                            priority ENUM('Low', 'Medium', 'High'),
-                            status TINYINT(1) DEFAULT 0
-
-                        )";
+                CREATE TABLE IF NOT EXISTS `{username}_tasks` (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    task_name VARCHAR(100),
+                    due_date DATE,
+                    category ENUM('Work', 'Personal'),
+                    description TEXT,
+                    priority ENUM('Low', 'Medium', 'High'),
+                    status ENUM('In Progress', 'Completed', 'Overdue', 'Pending') DEFAULT 'Pending'
+                )";
 
                             using (MySqlCommand taskCmd = new MySqlCommand(taskTableQuery, connection))
                             {
@@ -99,6 +98,7 @@ namespace Task_Manager
                 }
             }
         }
+
 
 
         private bool IsValidPassword(string password)
@@ -125,7 +125,7 @@ namespace Task_Manager
         {
             string username = Login_username.Text;
             string password = Login_pass.Password;
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
