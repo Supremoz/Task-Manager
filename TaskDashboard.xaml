@@ -710,7 +710,7 @@
                     <Border x:Name="FilterButton" Grid.Row="0" Width="80" Height="22.5" CornerRadius="10" Background="#ECF7FF" Padding="5,0,0,0" Margin="10,-10,0,112" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Filter" FontFamily="/Fonts/#Pontano Sans" FontSize="16" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                            <Button Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Stretch" Cursor="Hand" Focusable="False" >
+                            <Button x:Name="FilterDropdownButton" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Stretch" Cursor="Hand" Focusable="False" Click="FilterDropdownButton_Click">
                                 <Image Source="/Resources/arrdown.png" Width="10" IsHitTestVisible="False" Margin="3.5,0,0,0">
                                     <Image.RenderTransform>
                                         <ScaleTransform x:Name="HoverImageScaleTask" ScaleX="1" ScaleY="1" />
@@ -736,24 +736,11 @@
                                     </EventTrigger>
                                 </Button.Triggers>
                             </Button>
-                            <Popup Name="TaskDropdownPopup" PlacementTarget="{Binding ElementName=TaskDropdownButton}" StaysOpen="False">
+                            <Popup Name="TaskDropdownPopup" PlacementTarget="{Binding ElementName=FilterDropdownButton}" StaysOpen="False">
                                 <Border BorderBrush="White" BorderThickness="1" Background="White" Padding="10">
-                                    <ListBox>
-                                        <ListBoxItem Content="WEEKLY" FontSize="15" BorderBrush="White" BorderThickness="1">
-                                            <ListBoxItem.Style>
-                                                <Style TargetType="ListBoxItem">
-                                                    <Setter Property="Background" Value="Transparent" />
-                                                    <Setter Property="Foreground" Value="Black" />
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#E0E0E0" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ListBoxItem.Style>
-                                        </ListBoxItem>
-                                        <ListBoxItem Content="MONTHLY" FontSize="15" BorderBrush="White" BorderThickness="1"/>
-                                        <ListBoxItem Content="YEARLY" FontSize="15" BorderBrush="White" BorderThickness="1"/>
+                                    <ListBox x:Name="filterDropdown" SelectionChanged="filterDropdown_SelectionChanged">
+                                        <ListBoxItem Content="Deadline" FontSize="15" BorderBrush="White" BorderThickness="1"/>
+                                        <ListBoxItem Content="Priority" FontSize="15" BorderBrush="White" BorderThickness="1"/>
                                     </ListBox>
                                 </Border>
                             </Popup>

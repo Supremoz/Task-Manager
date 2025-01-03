@@ -1,45 +1,45 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\",
+  "WorkspaceRootPath": "C:\\Users\\parai\\Downloads\\Task-Manager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\school files\\4th year - 1st sem\\softdev 3\\task-manager\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
   ],
@@ -50,39 +50,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AssemblyInfo.cs",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AssemblyInfo.cs",
-              "RelativeDocumentMoniker": "AssemblyInfo.cs",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AssemblyInfo.cs",
-              "RelativeToolTip": "AssemblyInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\Task.cs",
+              "RelativeDocumentMoniker": "Task.cs",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\Task.cs",
+              "RelativeToolTip": "Task.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:33:49.487Z"
+              "WhenOpened": "2024-12-28T07:31:46.77Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Task.cs",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\Task.cs",
-              "RelativeDocumentMoniker": "Task.cs",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\Task.cs",
-              "RelativeToolTip": "Task.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T07:31:46.77Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "TaskDashboard.xaml",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\TaskDashboard.xaml",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml",
               "RelativeDocumentMoniker": "TaskDashboard.xaml",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\TaskDashboard.xaml",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml",
               "RelativeToolTip": "TaskDashboard.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-26T06:27:20.874Z",
@@ -92,34 +81,59 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "TaskDashboard.xaml.cs",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\TaskDashboard.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml.cs",
               "RelativeDocumentMoniker": "TaskDashboard.xaml.cs",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\TaskDashboard.xaml.cs",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml.cs",
               "RelativeToolTip": "TaskDashboard.xaml.cs",
-              "ViewState": "AgIAALIBAAAAAAAAAAAzwNABAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAFgCAAAAAAAAAAAAALICAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T06:27:19.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAowH8AAABqAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AddWeeklyTasks.xaml",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml",
+              "RelativeDocumentMoniker": "AddWeeklyTasks.xaml",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml",
+              "RelativeToolTip": "AddWeeklyTasks.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-22T11:29:21.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\AssemblyInfo.cs",
+              "RelativeToolTip": "AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T05:50:37.593Z"
+              "WhenOpened": "2024-12-29T13:33:49.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAowHsAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T05:50:37.593Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "README.md",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\README.md",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\README.md",
               "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\README.md",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\README.md",
               "RelativeToolTip": "README.md",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
@@ -127,22 +141,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AddWeeklyTasks.xaml",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AddWeeklyTasks.xaml",
-              "RelativeDocumentMoniker": "AddWeeklyTasks.xaml",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AddWeeklyTasks.xaml",
-              "RelativeToolTip": "AddWeeklyTasks.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T11:29:21.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "AddWeeklyTasks.xaml.cs",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AddWeeklyTasks.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml.cs",
               "RelativeDocumentMoniker": "AddWeeklyTasks.xaml.cs",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\AddWeeklyTasks.xaml.cs",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml.cs",
               "RelativeToolTip": "AddWeeklyTasks.xaml.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAkwCMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -152,23 +155,25 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "App.xaml",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\App.xaml",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\App.xaml",
               "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\App.xaml",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\App.xaml",
               "RelativeToolTip": "App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-20T07:42:34.781Z"
+              "WhenOpened": "2024-12-20T07:42:34.781Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\School Files\\4th year - 1st sem\\SoftDev 3\\Task-Manager\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-27T17:13:08.303Z"
+              "WhenOpened": "2024-11-27T17:13:08.303Z",
+              "EditorCaption": ""
             }
           ]
         }

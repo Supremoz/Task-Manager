@@ -120,7 +120,7 @@ namespace Task_Manager
 
         private MySqlConnection GetDatabaseConnection()
         {
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
             return new MySqlConnection(connectionString);
         }
 
@@ -139,7 +139,7 @@ namespace Task_Manager
             _isLoading = true;
 
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -212,7 +212,7 @@ namespace Task_Manager
         private void LoadTasksToGrid()
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -225,7 +225,7 @@ namespace Task_Manager
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            List<TaskItem> fetchedTasks = new List<TaskItem>();
+                            _allTasks.Clear(); // Clear the existing tasks
 
                             while (reader.Read())
                             {
@@ -246,11 +246,11 @@ namespace Task_Manager
                                 task.SetPriorityColor(); // Set the priority color based on the priority
 
                                 // Add the task to the list
-                                fetchedTasks.Add(task);
+                                _allTasks.Add(task);
                             }
 
                             // Update the DataGrid (TaskListTableTaskSummary) directly with the fetched tasks
-                            TaskListTableTaskSummary.ItemsSource = fetchedTasks;
+                            TaskListTableTaskSummary.ItemsSource = _allTasks; // Initially display all tasks
                         }
                     }
                 }
@@ -351,7 +351,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(int taskId, int status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -382,63 +382,73 @@ namespace Task_Manager
 
         // Add Task to Database and Update DataGrid
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)
-{
-    // Collect data from UI elements
-    string taskName = TaskNameTxt.Text.Trim();
-    DateTime? dueDate = CustomDatePicker.SelectedDate;
-    string description = DescriptionTxt.Text.Trim();
-    string category = (CategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-    string priority = (PriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+        {
+            // Collect data from UI elements
+            string taskName = TaskNameTxt.Text.Trim();
+            DateTime? dueDate = CustomDatePicker.SelectedDate;
+            string description = DescriptionTxt.Text.Trim();
+            string category = (CategoryComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            string priority = (PriorityComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
-    // Validation for empty fields
-    if (string.IsNullOrEmpty(taskName) ||
-        dueDate == null ||
-        string.IsNullOrEmpty(description) ||
-        string.IsNullOrEmpty(category) ||
-        category == "Select Category" ||
-        string.IsNullOrEmpty(priority) ||
-        priority == "TYPE OF PRIORITY")
-    {
-        MessageBox.Show("All fields (Task Name, Due Date, Description, Category, and Priority) must be filled before saving.",
-                        "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-        return;
-    }
+            // Validation for empty fields
+            if (string.IsNullOrEmpty(taskName) ||
+                dueDate == null ||
+                string.IsNullOrEmpty(description) ||
+                string.IsNullOrEmpty(category) ||
+                category == "Select Category" ||
+                string.IsNullOrEmpty(priority) ||
+                priority == "TYPE OF PRIORITY")
+            {
+                MessageBox.Show("All fields (Task Name, Due Date, Description, Category, and Priority) must be filled before saving.",
+                                "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-    // Validation for past dates
-    if (dueDate.Value.Date < DateTime.Today)
-    {
-        MessageBox.Show("Due Date cannot be in the past. Please select a valid future date.",
-                        "Invalid Due Date", MessageBoxButton.OK, MessageBoxImage.Warning);
-        return;
-    }
+            // Validation for past dates
+            if (dueDate.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("Due Date cannot be in the past. Please select a valid future date.",
+                                "Invalid Due Date", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-    // SQL Query to add task
-    string userTaskTable = $"{_username}_tasks";
-    string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
+            // SQL Query to add task
+            string userTaskTable = $"{_username}_tasks";
+            string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
                       VALUES (@taskName, @dueDate, @description, @category, @priority)";
 
-    ExecuteNonQuery(query, cmd =>
-    {
-        cmd.Parameters.AddWithValue("@taskName", taskName);
-        cmd.Parameters.AddWithValue("@dueDate", dueDate.Value.ToString("yyyy-MM-dd"));
-        cmd.Parameters.AddWithValue("@description", description);
-        cmd.Parameters.AddWithValue("@category", category);
-        cmd.Parameters.AddWithValue("@priority", priority);
-    }, "Task added successfully!", "Failed to add task.");
+            ExecuteNonQuery(query, cmd =>
+            {
+                cmd.Parameters.AddWithValue("@taskName", taskName);
+                cmd.Parameters.AddWithValue("@dueDate", dueDate.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@description", description);
+                cmd.Parameters.AddWithValue("@category", category);
+                cmd.Parameters.AddWithValue("@priority", priority);
+            }, "Task added successfully!", "Failed to add task.");
 
-    // Add task to the local task list
-    TaskList.Add(new TaskItem
-    {
-        TaskName = taskName,
-        Description = description,
-        Priority = priority,
-        Deadline = dueDate.Value.ToString("yyyy-MM-dd"),
-        Status = "Pending"
-    });
 
-    ClearTaskFields(); // Clear the input fields after adding the task
-    LoadTasks();
-}
+            // Create a new TaskItem
+            var newTask = new TaskItem
+            {
+                TaskName = taskName,
+                Description = description,
+                Priority = priority,
+                Category = category, // Ensure the category is set
+                Deadline = dueDate.Value.ToString("yyyy-MM-dd"),
+                Status = "Pending"
+            };
+
+            // Add task to the beginning of the local task list
+            TaskList.Insert(0, newTask); // Insert at the top of the list
+
+            // Update the UI to reflect the new TaskList
+            TaskListTableTaskSummary.ItemsSource = null; // Reset the binding
+            TaskListTableTaskSummary.ItemsSource = TaskList; // Rebind the updated TaskList
+
+            ClearTaskFields(); // Clear the input fields after adding the task
+
+
+        }
 
 
         // Generalized method for executing database commands
@@ -534,40 +544,68 @@ namespace Task_Manager
 
         private void SortTasks(string filterType, string sortOrder)
         {
-            var taskList = _allTasks;
-            IEnumerable<TaskItem> sortedTasks = taskList;
+            var taskList = _allTasks.AsEnumerable(); // Use _allTasks for sorting
 
+            // First, separate tasks into Active (Pending, In Progress) and Completed
+            var activeTasks = taskList.Where(task => task.Status != "Completed").AsEnumerable();
+            var completedTasks = taskList.Where(task => task.Status == "Completed").AsEnumerable();
+
+            // Define priorityOrder outside the switch block
+            var priorityOrder = new Dictionary<string, int>
+    {
+        { "Low", 1 },
+        { "Medium", 2 },
+        { "High", 3 }
+    };
+
+            // Sort Active Tasks
             switch (filterType)
             {
                 case "Priority":
-                    var priorityOrder = new Dictionary<string, int>
-            {
-                { "Low", 1 },
-                { "Medium", 2 },
-                { "High", 3 }
-            };
-
-                    sortedTasks = sortOrder == "Ascending"
-                        ? taskList.OrderBy(task => priorityOrder[task.Priority])
-                        : taskList.OrderByDescending(task => priorityOrder[task.Priority]);
+                    activeTasks = sortOrder == "Ascending"
+                        ? activeTasks.OrderBy(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 99)
+                        : activeTasks.OrderByDescending(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 0);
                     break;
 
                 case "Deadline":
-                    sortedTasks = sortOrder == "Ascending"
-                        ? taskList.OrderBy(task => DateTime.Parse(task.Deadline))
-                        : taskList.OrderByDescending(task => DateTime.Parse(task.Deadline));
+                    activeTasks = sortOrder == "Ascending"
+                        ? activeTasks.OrderBy(task => DateTime.Parse(task.Deadline))
+                        : activeTasks.OrderByDescending(task => DateTime.Parse(task.Deadline));
                     break;
 
                 default:
                     MessageBox.Show($"Sorting by {filterType} is not supported.", "Sort Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+            }
+
+            // Sort Completed Tasks
+            switch (filterType)
+            {
+                case "Priority":
+                    completedTasks = sortOrder == "Ascending"
+                        ? completedTasks.OrderBy(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 99)
+                        : completedTasks.OrderByDescending(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 0);
+                    break;
+
+                case "Deadline":
+                    completedTasks = sortOrder == "Ascending"
+                        ? completedTasks.OrderBy(task => DateTime.Parse(task.Deadline))
+                        : completedTasks.OrderByDescending(task => DateTime.Parse(task.Deadline));
                     break;
             }
 
+            // Combine Active Tasks and Completed Tasks
+            var finalSortedTasks = activeTasks.Concat(completedTasks).ToList();
+
+            // Clear the current task list and add sorted tasks
             TaskList.Clear();
-            foreach (var task in sortedTasks)
+            foreach (var task in finalSortedTasks)
             {
                 TaskList.Add(task);
             }
+
+            // Update the UI
+            TaskListTableTaskSummary.ItemsSource = TaskList;
         }
 
         private void FilterDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -651,7 +689,6 @@ namespace Task_Manager
             EditTaskView.Visibility = Visibility.Collapsed;
             TaskListView.Visibility = Visibility.Collapsed;
             TaskSummary.Visibility = Visibility.Visible;
-            LoadTasks();
             LoadTasksToGrid();
         }
         private void DashButton_Click(object sender, RoutedEventArgs e)
@@ -661,6 +698,7 @@ namespace Task_Manager
             EditTaskView.Visibility = Visibility.Collapsed;
             TaskSummary.Visibility = Visibility.Collapsed;
             CreateTaskView.Visibility = Visibility.Collapsed;
+            LoadTasks();
         }
 
         private void Edit_task_Click(object sender, RoutedEventArgs e)
@@ -745,7 +783,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(int taskId, string status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -770,7 +808,7 @@ namespace Task_Manager
         private void UpdateTaskInDatabaseNew(TaskItem updatedTask)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -806,7 +844,7 @@ namespace Task_Manager
         private void DeleteTaskFromDatabase(int taskId)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -924,6 +962,135 @@ namespace Task_Manager
                 MessageBox.Show("Tasks exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+        private void FilterDropdownButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle the visibility of the popup
+            TaskDropdownPopup.IsOpen = !TaskDropdownPopup.IsOpen;
+        }
+
+        private void filterDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (filterDropdown.SelectedItem is ListBoxItem selectedItem)
+            {
+                string filterType = selectedItem.Content.ToString();
+
+                switch (filterType)
+                {
+                    case "Deadline":
+                        // Call the method to filter tasks by deadline
+                        Filtertasks("DEADLINE", DateTime.Today.ToString("yyyy-MM-dd")); // Example: Filter for today's date
+                        Sorttasks("Deadline", "Ascending"); // Sort by deadline in ascending order
+                        break;
+
+                    case "Priority":
+                        // Call the method to filter tasks by priority
+                        Filtertasks("PRIORITY", "High"); // Example: Filter for High priority
+                        Sorttasks("Priority", "Descending"); // Sort by priority in descending order
+                        break;
+
+                    default:
+                        MessageBox.Show("Unknown filter type selected.", "Filter Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
+
+                // Close the popup after selection
+                TaskDropdownPopup.IsOpen = false;
+            }
+        }
+
+        private void Filtertasks(string filterType, string filterValue)
+        {
+            TaskList.Clear(); // Clear the current task list
+            var filteredTasks = _allTasks.AsQueryable();
+
+
+
+            switch (filterType)
+            {
+                case "PRIORITY":
+                    filteredTasks = filteredTasks.Where(t => t.Priority.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "DEADLINE":
+                    // Ensure the format matches the Deadline property
+                    filteredTasks = filteredTasks.Where(t => t.Deadline.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                default:
+                    break;
+            }
+
+            // Add filtered tasks to the TaskList
+            foreach (var task in filteredTasks)
+            {
+                TaskList.Add(task);
+            }
+        }
+        private void Sorttasks(string filterType, string sortOrder)
+        {
+            // Define priorityOrder globally in the method
+            var priorityOrder = new Dictionary<string, int>
+    {
+        { "High", 3 },
+        { "Medium", 2 },
+        { "Low", 1 }
+    };
+
+            // Step 1: Separate tasks into "Active" (Pending & In Progress) and "Completed"
+            var activeTasks = _allTasks.Where(task => task.Status != "Completed").AsEnumerable();
+            var completedTasks = _allTasks.Where(task => task.Status == "Completed").AsEnumerable();
+
+            // Step 2: Sort Active Tasks
+            switch (filterType)
+            {
+                case "Priority":
+                    activeTasks = sortOrder == "Ascending"
+                        ? activeTasks.OrderBy(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 99)
+                        : activeTasks.OrderByDescending(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 0);
+                    break;
+
+                case "Deadline":
+                    activeTasks = sortOrder == "Ascending"
+                        ? activeTasks.OrderBy(task => DateTime.Parse(task.Deadline))
+                        : activeTasks.OrderByDescending(task => DateTime.Parse(task.Deadline));
+                    break;
+
+                default:
+                    MessageBox.Show($"Sorting by {filterType} is not supported.", "Sort Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+            }
+
+            // Step 3: Sort Completed Tasks Separately
+            switch (filterType)
+            {
+                case "Priority":
+                    completedTasks = sortOrder == "Ascending"
+                        ? completedTasks.OrderBy(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 99)
+                        : completedTasks.OrderByDescending(task => priorityOrder.ContainsKey(task.Priority) ? priorityOrder[task.Priority] : 0);
+                    break;
+
+                case "Deadline":
+                    completedTasks = sortOrder == "Ascending"
+                        ? completedTasks.OrderBy(task => DateTime.Parse(task.Deadline))
+                        : completedTasks.OrderByDescending(task => DateTime.Parse(task.Deadline));
+                    break;
+            }
+
+            // Step 4: Combine Active Tasks and Completed Tasks
+            var finalSortedTasks = activeTasks.Concat(completedTasks).ToList();
+
+            // Step 5: Clear TaskList and Update UI
+            TaskList.Clear();
+            foreach (var task in finalSortedTasks)
+            {
+                TaskList.Add(task);
+            }
+
+            // Update UI
+            TaskListTableTaskSummary.ItemsSource = TaskList;
+        }
+
 
     }
 

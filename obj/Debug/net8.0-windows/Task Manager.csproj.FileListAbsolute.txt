@@ -286,3 +286,47 @@ C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windo
 C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Man.74AF0842.Up2Date
 C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
 C:\School Files\4th year - 1st sem\SoftDev 3\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.csproj.AssemblyReference.cache
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\AddWeeklyTasks.g.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\TaskDashboard.g.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.cache
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager_MarkupCompile.lref
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.dll
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\refint\Task Manager.dll
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.pdb
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Task Manager.exe
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Task Manager.deps.json
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Task Manager.runtimeconfig.json
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Task Manager.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Task Manager.pdb
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Google.Protobuf.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\K4os.Compression.LZ4.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\K4os.Hash.xxHash.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\MySql.Data.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\MySqlConnector.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\ZstdSharp.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\Users\parai\Downloads\Task-Manager\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\AddWeeklyTasks.baml
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\TaskDashboard.baml
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.g.resources
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfoInputs.cache
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.AssemblyInfo.cs
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.csproj.CoreCompileInputs.cache
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.sourcelink.json
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Man.74AF0842.Up2Date
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\Task Manager.genruntimeconfig.cache
+C:\Users\parai\Downloads\Task-Manager\obj\Debug\net8.0-windows\ref\Task Manager.dll
