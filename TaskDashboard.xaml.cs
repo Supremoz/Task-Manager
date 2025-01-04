@@ -19,6 +19,7 @@ namespace Task_Manager
 {
     public partial class TaskDashboard : Window
     {
+
         
         public class UserData
         {
@@ -30,11 +31,13 @@ namespace Task_Manager
         private List<TaskItem> _allTasks = new List<TaskItem>();
         // ObservableCollection to hold tasks dynamically
         public ObservableCollection<TaskItem> TaskList { get; set; } = new ObservableCollection<TaskItem>();
+        public ObservableCollection<TaskItem> NotificationTasks { get; set; } = new ObservableCollection<TaskItem>();
 
 
         public TaskDashboard(UserData userData)
         {
             InitializeComponent();
+            DataContext = this;
             _username = userData.Username;
             username_Dashboard.Text = _username;
 
@@ -42,10 +45,14 @@ namespace Task_Manager
             DashboardImageScale.ScaleY = 1.15;
 
             TaskListTable.ItemsSource = TaskList; // Bind ObservableCollection to DataGrid
+            NotificationListTableTaskSummary.ItemsSource = NotificationTasks; // Bind notification tasks
 
             LoadTasks(); // Load tasks into the DataGrid on startup
+            LoadNotificationTasks();
             LoadTasksToGrid();
+
         }
+
 
         // Define TaskItem class for DataGrid
         public class TaskItem : INotifyPropertyChanged
@@ -58,6 +65,34 @@ namespace Task_Manager
             public string Category { get; set; }
 
             private string _status = "In Progress";
+            public bool IsOverdue => DateTime.TryParse(Deadline, out DateTime deadline) && deadline < DateTime.Today;
+
+            private Brush _highlightColor;
+            public Brush HighlightColor
+            {
+                get => _highlightColor;
+                set
+                {
+                    _highlightColor = value;
+                    OnPropertyChanged(nameof(HighlightColor));
+                }
+            }
+
+            public void SetHighlightColor()
+            {
+                if (IsOverdue && Status != "Completed")
+                {
+                    HighlightColor = Brushes.Orange; // Highlight overdue tasks
+                }
+                else if (Status == "Completed")
+                {
+                    HighlightColor = Brushes.Transparent; // No highlight for completed tasks
+                }
+                else
+                {
+                    HighlightColor = Brushes.Transparent; // Default color for other tasks
+                }
+            }
             public string Status
             {
                 get => _status;
@@ -78,7 +113,7 @@ namespace Task_Manager
                     OnPropertyChanged(nameof(Status));
                 }
             }
-
+           
             private Brush _priorityColor;
             public Brush PriorityColor
             {
@@ -89,13 +124,14 @@ namespace Task_Manager
                     OnPropertyChanged(nameof(PriorityColor));
                 }
             }
-
+            
             public event PropertyChangedEventHandler PropertyChanged;
             protected virtual void OnPropertyChanged(string propertyName)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
 
+          
             // Set the priority color based on the priority level
             public void SetPriorityColor()
             {
@@ -415,7 +451,7 @@ namespace Task_Manager
             // SQL Query to add task
             string userTaskTable = $"{_username}_tasks";
             string query = $@"INSERT INTO `{userTaskTable}` (task_name, due_date, description, category, priority) 
-                      VALUES (@taskName, @dueDate, @description, @category, @priority)";
+                  VALUES (@taskName, @dueDate, @description, @category, @priority)";
 
             ExecuteNonQuery(query, cmd =>
             {
@@ -425,7 +461,7 @@ namespace Task_Manager
                 cmd.Parameters.AddWithValue("@category", category);
                 cmd.Parameters.AddWithValue("@priority", priority);
             }, "Task added successfully!", "Failed to add task.");
-
+            LoadNotificationTasks(); // Refresh notifications after adding a task
 
             // Create a new TaskItem
             var newTask = new TaskItem
@@ -447,7 +483,7 @@ namespace Task_Manager
 
             ClearTaskFields(); // Clear the input fields after adding the task
 
-
+           
         }
 
 
@@ -610,6 +646,7 @@ namespace Task_Manager
 
         private void FilterDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LoadTasks();
             if (FilterDropdown.SelectedItem is ListBoxItem selectedItem)
             {
                 string filterType = selectedItem.Content.ToString();
@@ -689,6 +726,8 @@ namespace Task_Manager
             EditTaskView.Visibility = Visibility.Collapsed;
             TaskListView.Visibility = Visibility.Collapsed;
             TaskSummary.Visibility = Visibility.Visible;
+            DueTask.Visibility = Visibility.Collapsed;
+
             LoadTasksToGrid();
         }
         private void DashButton_Click(object sender, RoutedEventArgs e)
@@ -698,7 +737,9 @@ namespace Task_Manager
             EditTaskView.Visibility = Visibility.Collapsed;
             TaskSummary.Visibility = Visibility.Collapsed;
             CreateTaskView.Visibility = Visibility.Collapsed;
+            DueTask.Visibility = Visibility.Collapsed;
             LoadTasks();
+
         }
 
         private void Edit_task_Click(object sender, RoutedEventArgs e)
@@ -753,9 +794,16 @@ namespace Task_Manager
                 TaskListView.Visibility = Visibility.Visible;
 
                 MessageBox.Show("Task updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadNotificationTasks();
+
             }
         }
-
+        private void CompleteTask(TaskItem taskToComplete)
+        {
+            taskToComplete.Status = "Completed"; // Update status
+            UpdateTaskStatusInDatabase(taskToComplete.TaskId, "Completed"); // Update in the database
+            LoadNotificationTasks(); // Load notifications after completing a task
+        }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -771,14 +819,14 @@ namespace Task_Manager
                 {
                     DeleteTaskFromDatabase(selectedTask.TaskId);
                     _allTasks.Remove(selectedTask);
-                    ReorderTaskList();
 
                     EditTaskView.Visibility = Visibility.Collapsed;
                     TaskListView.Visibility = Visibility.Visible;
-
                     MessageBox.Show("Task deleted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
             }
+            LoadNotificationTasks();
         }
         private void UpdateTaskStatusInDatabase(int taskId, string status)
         {
@@ -868,6 +916,7 @@ namespace Task_Manager
                     MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+          
         }
         private void TaskListTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1001,6 +1050,7 @@ namespace Task_Manager
 
         private void Filtertasks(string filterType, string filterValue)
         {
+            LoadTasksToGrid();
             TaskList.Clear(); // Clear the current task list
             var filteredTasks = _allTasks.AsQueryable();
 
@@ -1090,7 +1140,71 @@ namespace Task_Manager
             // Update UI
             TaskListTableTaskSummary.ItemsSource = TaskList;
         }
+        private void LoadNotificationTasks()
+        {
+            DateTime today = DateTime.Today;
+            DateTime tomorrow = today.AddDays(1);
 
+            NotificationTasks.Clear(); // Clear previous notifications
+
+            string userTaskTable = $"{_username}_tasks";
+            using (MySqlConnection connection = GetDatabaseConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    // Exclude completed tasks in the query
+                    string query = $"SELECT id, task_name, description, priority, category, due_date, status FROM `{userTaskTable}` " +
+                                   $"WHERE (due_date = @today OR due_date = @tomorrow OR due_date < @today) AND status != 'Completed'";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@today", today.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@tomorrow", tomorrow.ToString("yyyy-MM-dd"));
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var task = new TaskItem
+                                {
+                                    TaskId = Convert.ToInt32(reader["id"]),
+                                    TaskName = reader["task_name"].ToString(),
+                                    Description = reader["description"].ToString(),
+                                    Priority = reader["priority"].ToString(),
+                                    Category = reader["category"].ToString(),
+                                    Deadline = Convert.ToDateTime(reader["due_date"]).ToString("yyyy-MM-dd"),
+                                    Status = reader["status"].ToString()
+                                };
+
+                                // Set the highlight color based on the task's status
+                                task.SetHighlightColor();
+
+                                NotificationTasks.Add(task);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading notification tasks: {ex.Message}");
+                }
+            }
+
+        }
+
+        private void NotifBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle the visibility of the notification grid
+            DueTask.Visibility = Visibility.Visible;
+            TaskListView.Visibility = Visibility.Collapsed;
+            EditTaskView.Visibility = Visibility.Collapsed;
+            TaskSummary.Visibility = Visibility.Collapsed;
+            CreateTaskView.Visibility = Visibility.Collapsed;
+            LoadNotificationTasks();
+
+        }
+        
 
     }
 

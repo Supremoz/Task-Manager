@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\parai\\Downloads\\Task-Manager\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\parai\\downloads\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -62,12 +62,11 @@
               "RelativeToolTip": "Task.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T07:31:46.77Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-28T07:31:46.77Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "TaskDashboard.xaml",
               "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml",
               "RelativeDocumentMoniker": "TaskDashboard.xaml",
@@ -79,28 +78,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TaskDashboard.xaml.cs",
               "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml.cs",
               "RelativeDocumentMoniker": "TaskDashboard.xaml.cs",
-              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml.cs*",
-              "RelativeToolTip": "TaskDashboard.xaml.cs*",
-              "ViewState": "AgIAAJMCAAAAAAAAAAAUwLICAAA4AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\TaskDashboard.xaml.cs",
+              "RelativeToolTip": "TaskDashboard.xaml.cs",
+              "ViewState": "AgIAAH8EAAAAAAAAAAAqwKkEAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T06:27:19.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AddWeeklyTasks.xaml",
               "DocumentMoniker": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml",
               "RelativeDocumentMoniker": "AddWeeklyTasks.xaml",
               "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\AddWeeklyTasks.xaml",
               "RelativeToolTip": "AddWeeklyTasks.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-22T11:29:21.848Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-22T11:29:21.848Z"
             },
             {
               "$type": "Document",
@@ -124,8 +122,7 @@
               "RelativeToolTip": "MainWindow.xaml.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAowHsAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T05:50:37.593Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T05:50:37.593Z"
             },
             {
               "$type": "Document",
@@ -172,8 +169,7 @@
               "ToolTip": "C:\\Users\\parai\\Downloads\\Task-Manager\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-27T17:13:08.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T17:13:08.303Z"
             }
           ]
         }
