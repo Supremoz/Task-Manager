@@ -46,7 +46,7 @@ namespace Task_Manager
             }
 
             string hashedPassword = HashPassword(password);
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -125,7 +125,7 @@ namespace Task_Manager
         {
             string username = Login_username.Text;
             string password = Login_pass.Password;
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -147,10 +147,12 @@ namespace Task_Manager
                             isAdmin = true;
                             MessageBox.Show("Admin login successful.");
 
-                            AddWeeklyTasks adminWindow = new AddWeeklyTasks();
+                            // Pass the username to the AddWeeklyTasks window
+                            AddWeeklyTasks adminWindow = new AddWeeklyTasks(username);
                             adminWindow.Show();
                             this.Close();
                         }
+
                     }
 
                     if (!isAdmin)
