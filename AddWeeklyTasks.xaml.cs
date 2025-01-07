@@ -23,6 +23,7 @@ namespace Task_Manager
     public partial class AddWeeklyTasks : Window
     {
         private string adminUsername;
+        private DataTable userDataTable;
 
         public AddWeeklyTasks(string username)
         {
@@ -45,9 +46,10 @@ namespace Task_Manager
             Admin_name.Text = adminUsername;
             LoadUsersWithTasks();
         }
+
         private void LoadUsersWithTasks()
         {
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -61,9 +63,9 @@ namespace Task_Manager
                     {
                         using (MySqlDataReader userReader = userCmd.ExecuteReader())
                         {
-                            DataTable dataTable = new DataTable();
-                            dataTable.Columns.Add("username", typeof(string));
-                            dataTable.Columns.Add("task_count", typeof(int));
+                            userDataTable = new DataTable(); // Initialize the DataTable
+                            userDataTable.Columns.Add("username", typeof(string));
+                            userDataTable.Columns.Add("task_count", typeof(int));
 
                             while (userReader.Read())
                             {
@@ -93,14 +95,14 @@ namespace Task_Manager
                                 }
 
                                 // Add user data to DataTable
-                                DataRow row = dataTable.NewRow();
+                                DataRow row = userDataTable.NewRow();
                                 row["username"] = username;
                                 row["task_count"] = taskCount;
-                                dataTable.Rows.Add(row);
+                                userDataTable.Rows.Add(row);
                             }
 
                             // Bind data to DataGrid
-                            TaskListTable.ItemsSource = dataTable.DefaultView;
+                            TaskListTable.ItemsSource = userDataTable.DefaultView;
                         }
                     }
                 }
@@ -111,6 +113,46 @@ namespace Task_Manager
             }
         }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                // If the search box is empty, show all users
+                TaskListTable.ItemsSource = userDataTable.DefaultView;
+            }
+            else
+            {
+                // Filter the DataTable based on the search text
+                var filteredRows = userDataTable.AsEnumerable()
+                    .Where(row => row.Field<string>("username").ToLower().Contains(searchText));
+
+                // Create a new DataView for the filtered results
+                DataView filteredView = filteredRows.CopyToDataTable().DefaultView;
+                TaskListTable.ItemsSource = filteredView;
+            }
+        }
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                // If the search box is empty, show all users
+                TaskListTable.ItemsSource = userDataTable.DefaultView;
+            }
+            else
+            {
+                // Filter the DataTable based on the search text
+                var filteredRows = userDataTable.AsEnumerable()
+                    .Where(row => row.Field<string>("username").ToLower().Contains(searchText));
+
+                // Create a new DataView for the filtered results
+                DataView filteredView = filteredRows.CopyToDataTable().DefaultView;
+                TaskListTable.ItemsSource = filteredView;
+            }
+        }
 
         private void ViewTasks_Click(object sender, RoutedEventArgs e)
         {
@@ -131,7 +173,7 @@ namespace Task_Manager
 
         private void LoadUserTasks(string username)
         {
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
             string taskTable = $"{username}_tasks";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -211,7 +253,7 @@ namespace Task_Manager
                 return;
             }
 
-            string connectionString = "server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = "server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -266,6 +308,7 @@ namespace Task_Manager
                     MessageBox.Show($"An error occurred while connecting to the database: {ex.Message}");
                 }
             }
+
         }
 
 

@@ -156,7 +156,7 @@ namespace Task_Manager
 
         private MySqlConnection GetDatabaseConnection()
         {
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
             return new MySqlConnection(connectionString);
         }
 
@@ -175,7 +175,7 @@ namespace Task_Manager
             _isLoading = true;
 
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -248,7 +248,7 @@ namespace Task_Manager
         private void LoadTasksToGrid()
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -387,7 +387,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(int taskId, int status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -831,7 +831,7 @@ namespace Task_Manager
         private void UpdateTaskStatusInDatabase(int taskId, string status)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -856,7 +856,7 @@ namespace Task_Manager
         private void UpdateTaskInDatabaseNew(TaskItem updatedTask)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -892,7 +892,7 @@ namespace Task_Manager
         private void DeleteTaskFromDatabase(int taskId)
         {
             string userTaskTable = $"{_username}_tasks";
-            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=2817;";
+            string connectionString = $"server=localhost;database=accountmanagement;user=root;password=1234;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

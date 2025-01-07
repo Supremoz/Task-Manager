@@ -1,45 +1,45 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\",
+  "WorkspaceRootPath": "C:\\MY FILES\\Task-Manager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:addweeklytasks.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:taskdashboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\users\\dell\\onedrive\\desktop\\task-manager\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "AbsoluteMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|c:\\my files\\task-manager\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{7796D4A0-877D-4B8F-8CBF-8E15B4F8C111}|Task Manager.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
     }
   ],
@@ -50,43 +50,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AddWeeklyTasks.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AddWeeklyTasks.xaml",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\AddWeeklyTasks.xaml",
               "RelativeDocumentMoniker": "AddWeeklyTasks.xaml",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AddWeeklyTasks.xaml",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\AddWeeklyTasks.xaml",
               "RelativeToolTip": "AddWeeklyTasks.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-22T11:29:21.848Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "AssemblyInfo.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\AssemblyInfo.cs",
               "RelativeDocumentMoniker": "AssemblyInfo.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AssemblyInfo.cs",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\AssemblyInfo.cs",
               "RelativeToolTip": "AssemblyInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -94,13 +78,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAAAGMAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAgBAAAAAAAAAADwvzAAAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T05:50:37.593Z",
               "EditorCaption": ""
@@ -109,9 +93,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "README.md",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\README.md",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\README.md",
               "RelativeDocumentMoniker": "README.md",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\README.md",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\README.md",
               "RelativeToolTip": "README.md",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
@@ -119,26 +103,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AddWeeklyTasks.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AddWeeklyTasks.xaml.cs",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\AddWeeklyTasks.xaml.cs",
               "RelativeDocumentMoniker": "AddWeeklyTasks.xaml.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\AddWeeklyTasks.xaml.cs",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\AddWeeklyTasks.xaml.cs",
               "RelativeToolTip": "AddWeeklyTasks.xaml.cs",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAcwPUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAcwJoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-22T11:15:32.181Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "TaskDashboard.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\TaskDashboard.xaml.cs",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\TaskDashboard.xaml.cs",
               "RelativeDocumentMoniker": "TaskDashboard.xaml.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\TaskDashboard.xaml.cs",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\TaskDashboard.xaml.cs",
               "RelativeToolTip": "TaskDashboard.xaml.cs",
-              "ViewState": "AgIAAL4CAAAAAAAAAAAAAM4CAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAE4EAAAAAAAAAAAAwH4DAABrAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T06:27:19.01Z",
               "EditorCaption": ""
@@ -147,21 +131,20 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "TaskDashboard.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\TaskDashboard.xaml",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\TaskDashboard.xaml",
               "RelativeDocumentMoniker": "TaskDashboard.xaml",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\TaskDashboard.xaml",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\TaskDashboard.xaml",
               "RelativeToolTip": "TaskDashboard.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-26T06:27:20.874Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T06:27:20.874Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "Task.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\Task.cs",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\Task.cs",
               "RelativeDocumentMoniker": "Task.cs",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\Task.cs",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\Task.cs",
               "RelativeToolTip": "Task.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -171,9 +154,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\App.xaml",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\App.xaml",
               "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\App.xaml",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\App.xaml",
               "RelativeToolTip": "App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-12-20T07:42:34.781Z",
@@ -183,13 +166,12 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\MY FILES\\Task-Manager\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Task-Manager\\MainWindow.xaml",
+              "ToolTip": "C:\\MY FILES\\Task-Manager\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-27T17:13:08.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T17:13:08.303Z"
             }
           ]
         }

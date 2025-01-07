@@ -257,8 +257,8 @@
             <Border Margin="8,8,0,0" Background="#DEECF8" CornerRadius="10" Width="420" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <StackPanel Background="Transparent" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Source="/Resources/Leading-icon.png" Width="45"/>
-                    <TextBox FontFamily="/Fonts/#Pontano Sans" FontSize="20" VerticalAlignment="Center" Background="#DEECF8" Width="328" Height="42" BorderBrush="Transparent" VerticalContentAlignment="Center"/>
-                    <Button Background="#DEECF8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Height="45" Padding="0" BorderBrush="Transparent">
+                    <TextBox x:Name="SearchTextBox" FontFamily="/Fonts/#Pontano Sans" FontSize="20" VerticalAlignment="Center" Background="#DEECF8" Width="328" Height="42" BorderBrush="Transparent" VerticalContentAlignment="Center" TextChanged="SearchTextBox_TextChanged"/>
+                    <Button x:Name="SearchButton" Background="#DEECF8" HorizontalAlignment="Left" VerticalAlignment="Top" Width="45" Height="45" Padding="0" BorderBrush="Transparent" Click="SearchButton_Click">
                         <Image Source="/Resources/filter.png" Width="30"/>
                     </Button>
                 </StackPanel>
